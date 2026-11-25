@@ -5,18 +5,15 @@
     "rooms": {
       "$code": {
         ".read": "auth != null",
-        ".write": "auth != null && ((!data.exists() && newData.child('host').val() === auth.uid) || (data.exists() && data.child('host').val() === auth.uid && !newData.exists()))",
-        ".validate": "$code.length === 4 && newData.hasChildren(['host'])",
-        "host": {
-          ".write": "auth != null && newData.val() === auth.uid && (data.val() === auth.uid || !data.exists() || root.child('rooms').child($code).child('players').child(data.val()).child('on').val() !== true)"
-        },
+        ".write": "auth != null && ((!data.exists() && newData.child('owner').val() === auth.uid) || (data.exists() && data.child('created').val() < now - 86400000 && (!newData.exists() || newData.child('owner').val() === auth.uid)) || (data.exists() && !newData.exists() && data.child('owner').val() === auth.uid))",
+        ".validate": "$code.length === 6",
+        "owner": { ".validate": "newData.isString()" },
         "created": { ".validate": "newData.isNumber()" },
-        "state": {
-          ".write": "auth != null && newData.parent().child('host').val() === auth.uid",
-          ".validate": "newData.isString() && newData.val().length <= 12"
+        "host": {
+          ".write": "auth != null && ((newData.val() === auth.uid && (!data.exists() || data.val() === auth.uid || root.child('rooms/' + $code + '/players/' + data.val() + '/on').val() !== true || root.child('rooms/' + $code + '/players/' + data.val() + '/role').val() !== 'p')) || (!newData.exists() && (data.val() === auth.uid || root.child('rooms/' + $code + '/owner').val() === auth.uid)))"
         },
-        "cfg": { ".write": "auth != null && newData.parent().child('host').val() === auth.uid" },
-        "round": { ".write": "auth != null && newData.parent().child('host').val() === auth.uid" },
+        "cfg": { ".write": "auth != null && (newData.parent().child('host').val() === auth.uid || newData.parent().child('owner').val() === auth.uid)" },
+        "round": { ".write": "auth != null && (newData.parent().child('host').val() === auth.uid || newData.parent().child('owner').val() === auth.uid)" },
         "players": {
           "$uid": {
             ".write": "auth != null && auth.uid === $uid",
@@ -25,7 +22,7 @@
         },
         "words": {
           "$rn": {
-            ".write": "auth != null && !newData.exists() && root.child('rooms').child($code).child('host').val() === auth.uid",
+            ".write": "auth != null && !newData.exists() && (root.child('rooms/' + $code + '/host').val() === auth.uid || root.child('rooms/' + $code + '/owner').val() === auth.uid)",
             "$uid": { ".write": "auth != null && auth.uid === $uid" }
           }
         },

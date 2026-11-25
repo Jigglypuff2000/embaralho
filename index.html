@@ -271,58 +271,136 @@ input[type=text]{width:100%;font:700 20px var(--fd);padding:10px 14px;border:3px
 @media(max-width:640px){.hud{grid-template-columns:minmax(0,1fr) auto}.hud-r{grid-column:2;grid-row:1}.hud .center{grid-column:1/-1;grid-row:2;justify-self:center}.me .av{width:44px;height:44px}.tray{width:100%;min-width:0;border-radius:22px}.wordzone{height:72px}.wchip{font-size:22px;height:40px}.batt .cell{width:120px}.card{padding:16px}.card h1{font-size:26px}.logo span{width:30px;height:34px;font-size:19px}.avs{grid-template-columns:repeat(4,minmax(0,1fr))}.how{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
 /* ---------- multijogador ---------- */
-.mode.b-mint{background:#7ff0ff}
+body.menu .app{visibility:hidden}
+body.menu .ov{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
 .credits{font:700 12px/1.4 var(--fb);color:var(--muted)}.credits summary{cursor:pointer;font-weight:800}.credits p{margin:6px 0 0}
-.or{text-align:center;font:800 13px var(--fb);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.q{background:#fff;border-radius:12px;padding:5px;border:3px solid var(--ink)}.q svg{width:100%;height:100%;display:block}
+.code{font:700 clamp(26px,4vh,40px)/1 var(--fd);letter-spacing:.14em}
 .joinrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
-#codeIn{text-transform:uppercase;letter-spacing:.35em;text-align:center;font-size:26px}
-.lobby{width:min(720px,100%)}
-.inv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;background:var(--soft);border:3px solid var(--ink);border-radius:20px;padding:12px}
-.inv .qr{width:132px;height:132px;background:#fff;border-radius:12px;padding:4px;border:3px solid var(--ink)}
-.inv .qr svg{width:100%;height:100%;display:block}
-.inv small{display:block;font:700 13px/1.3 var(--fb);color:var(--muted)}
-.inv .code{font:700 clamp(38px,8vw,56px)/1.1 var(--fd);letter-spacing:.18em;margin:4px 0 8px}
-.inv .b-ghost{color:var(--panelInk);border-color:var(--ink);background:transparent;min-height:38px}
-.pls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.plc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:16px;background:var(--soft);border:3px solid var(--ink);min-height:104px;animation:pop .3s}
-.plc .av{width:52px;height:52px}.plc b{font:700 15px var(--fd);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.plc small{font:800 11px var(--fb);color:var(--muted)}
-.plc.me{background:var(--sel)}.plc.me small{color:var(--ink)}
-.plc.empty{opacity:.35;border-style:dashed;animation:none}.plc.empty .av{border-radius:50%;border:3px dashed var(--ink)}
-.plc .tvi,#hAv .tvi{display:grid;place-items:center;font-size:36px;height:100%}
-.tvt{display:flex;align-items:center;gap:10px;font:800 15px var(--fb);cursor:pointer}.tvt input{width:22px;height:22px;accent-color:var(--coral)}
-#lbMsg{text-align:center;font-weight:800}
+.homewrap{display:flex;gap:22px;align-items:center;justify-content:center;margin:auto;max-width:100%}
+.homewrap>.card{margin:0}
+.qrp{width:250px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:28px;padding:18px 16px;box-shadow:0 8px 0 var(--ink);animation:cardin .35s}
+.qrp>b{font:700 16px/1.25 var(--fd)}.qrp .q{width:170px;height:170px}.qrp small{font:700 12px/1.3 var(--fb);color:var(--muted)}
+.qrp .b-sun{width:100%;min-height:42px}.qpj{width:100%;display:flex;flex-direction:column;gap:4px;border-top:2px dashed var(--line);padding-top:8px}
+.qpj input{font-size:17px!important;padding:6px 8px!important;letter-spacing:.12em;text-transform:uppercase;text-align:center}.qpj button{min-height:40px;padding:0 12px}
+.prof .ico{width:46px;padding:0;font-size:20px}
+/* notebook como tela de espera */
+.ov.scr{display:block;padding:0}
+.scp{position:absolute;left:clamp(12px,2vw,28px);top:clamp(12px,2vh,24px);display:flex;flex-direction:column;gap:10px;max-height:calc(100% - 40px);flex-wrap:wrap}
+.pb{display:flex;align-items:center;gap:8px;background:rgba(27,18,56,.85);color:#fff;border-radius:16px 40px 40px 16px;padding:4px 14px 4px 4px;animation:cardin .4s}
+.pb .av{width:clamp(44px,6vh,60px);height:clamp(44px,6vh,60px)}.pb b{display:block;font:700 clamp(15px,2.2vh,20px) var(--fd)}.pb small{font:800 11px var(--fb);color:#6ee7ff;text-transform:uppercase;letter-spacing:.06em}
+.pb.me{outline:3px solid var(--sel)}
+.scc{position:absolute;right:clamp(12px,2vw,28px);top:clamp(12px,2vh,24px)}.scc .cnt{background:var(--ink);color:#fff;border-radius:99px;padding:6px 14px;font:700 18px var(--fd)}
+.scmain{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2vh,18px);padding:20px}
+.scmain .logo{transform:scale(1.25);margin-bottom:clamp(6px,2vh,20px)}
+.scqr{display:flex;align-items:center;gap:20px;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:26px;padding:16px 26px 16px 16px;box-shadow:0 8px 0 var(--ink)}
+.scqr .q{width:clamp(150px,26vh,230px);height:clamp(150px,26vh,230px)}.scqr small{display:block;max-width:240px;font:800 14px/1.3 var(--fb);color:var(--muted);margin-bottom:6px}
+#scMsg{margin:0;font:700 clamp(18px,2.8vh,26px) var(--fd);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.25)}#scCfg{font:800 14px var(--fb);color:#fff;opacity:.85}
+#bMeToo{min-height:54px;padding:0 30px;font-size:19px}
+/* lobby do jogador */
+.lob{width:min(440px,100%);height:min(100%,780px);display:flex;flex-direction:column;align-items:stretch;gap:clamp(8px,1.6vh,14px);margin:auto}
+.lbtop{display:grid;grid-template-columns:46px 1fr 46px;align-items:center;gap:8px}.lbtop span{text-align:center;color:#fff;font:700 18px var(--fd);letter-spacing:.06em}
+.lbtop .ico{width:46px;padding:0;font-size:18px}
+.lbpl{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;min-height:44px}
+.lp{position:relative;width:40px;height:40px}.lp.me{outline:3px solid var(--sel);border-radius:50%}.lp i{position:absolute;right:-6px;top:-8px;font-style:normal;font-size:15px}
+.lbpl small{color:#fff;font:800 13px var(--fb);margin-left:4px}
+.lbcard{position:relative;flex:1 1 auto;min-height:150px;max-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(#5a2bd6,#3a1a9e);border:4px solid var(--ink);border-radius:26px;box-shadow:0 7px 0 var(--ink);color:#fff}
+.lbcard .av{width:clamp(90px,17vh,150px);height:clamp(90px,17vh,150px)}.lbcard b{font:700 clamp(22px,3.4vh,30px) var(--fd)}
+.lbcard .tag{position:absolute;top:-14px;right:16px;background:var(--ink);color:#6ee7ff;border-radius:99px;padding:5px 12px;font:800 13px var(--fb);letter-spacing:.06em}
+#lbMsg{margin:0;text-align:center;color:#fff;font:700 clamp(17px,2.5vh,21px) var(--fd)}#lbCfgT{text-align:center;color:#fff;opacity:.85;font:800 14px var(--fb)}
+.lbcfg{display:flex;flex-direction:column;gap:8px;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:20px;padding:10px 12px}
+.lbcfg>div{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:8px;font:800 13px var(--fb)}
+.lbcfg .seg button{min-height:36px;min-width:0;padding:0 4px;font-size:14px;box-shadow:0 3px 0 var(--ink)}
+.lbcfg select{font:700 15px var(--fb);padding:6px 8px;border:3px solid var(--ink);border-radius:12px;background:var(--soft);color:var(--panelInk)}
+#bLbStart{min-height:clamp(52px,7.5vh,64px);font-size:clamp(19px,2.8vh,24px);border-radius:22px}
+/* convite */
+#vInvite,#mpWords{z-index:9;background:rgba(15,8,45,.55)!important;backdrop-filter:blur(4px)!important}
+.inv2{width:min(360px,100%);align-items:center;text-align:center}.inv2>b{font:700 18px/1.25 var(--fd)}.inv2 .q{width:min(220px,60vw);height:min(220px,60vw)}.inv2 small{font:700 13px var(--fb);color:var(--muted)}.inv2 button{width:100%}
+#mpWords .card{width:min(520px,100%);max-height:86svh}#mpWords .chips{display:flex;flex-wrap:wrap;gap:6px;overflow:auto;max-height:52svh}
+/* durante a partida */
 .mpbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;width:min(100%,560px)}
-.mpc{display:flex;align-items:center;gap:6px;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:99px;padding:2px 10px 2px 2px;box-shadow:0 3px 0 var(--ink);transition:transform .2s}
+.mpc{display:flex;align-items:center;gap:6px;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:99px;padding:2px 10px 2px 2px;box-shadow:0 3px 0 var(--ink)}
 .mpc .av{width:30px;height:30px}.mpc .nm{font:700 13px var(--fd);max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mpc b{font:700 20px var(--fd);min-width:22px;text-align:right}
+.mpc b{font:700 20px var(--fd);min-width:18px;text-align:right}.mpc small{font:800 10px var(--fb);opacity:.7}
 .mpc.me{background:var(--sel)}.mpc.off{opacity:.45}
 body.spect .side,body.spect .tools,body.spect .wordzone{visibility:hidden}
-body.spect .mpbar{width:min(100%,980px);gap:10px}
-body.spect .mpc{padding:4px 18px 4px 4px}body.spect .mpc .av{width:52px;height:52px}body.spect .mpc .nm{font-size:20px;max-width:180px}body.spect .mpc b{font-size:34px}
-.mpres{overflow:auto}
-.mpr{max-width:1240px;margin:0 auto;padding:clamp(12px,2.2vh,24px) clamp(14px,2.5vw,36px) 28px;display:flex;flex-direction:column;align-items:center;gap:16px;color:#fff}
-.podium{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;width:100%}
-.pc{position:relative;flex:0 1 220px;min-width:170px;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:24px;padding:14px 12px 12px;box-shadow:0 6px 0 var(--ink);animation:cardin .4s backwards}
-.pc.gold{background:linear-gradient(#fff4c2,#ffd23f);color:var(--ink)}
-.pc.me{outline:4px solid #fff;outline-offset:3px}
-.pc .rk{position:absolute;left:10px;top:8px;font:700 22px var(--fd)}
-.pc .av{width:78px;height:78px}.pc .nm{font:700 20px var(--fd);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pc .big{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
-.pc .big div{display:flex;flex-direction:column;align-items:center;background:var(--ink);color:#fff;border-radius:16px;padding:6px 4px}
-.pc .big b{font:700 clamp(30px,5vh,42px)/1.05 var(--fd)}.pc .big small{font:800 12px var(--fb);opacity:.85;text-transform:uppercase}
-.pc .big div:first-child b{color:var(--sel)}
-.mpinfo{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;align-items:center;background:var(--ink);border-radius:20px;padding:10px 18px}
-.mpinfo>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.mpinfo small{font:800 12px var(--fb);opacity:.85;text-transform:uppercase}.mpinfo em{font:700 13px var(--fb);opacity:.85}
-.mpinfo .rule{font:700 13px var(--fb);opacity:.8;flex-basis:100%;justify-content:center}
-.pws{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;width:100%}
-.pw{background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:20px;padding:10px 12px;box-shadow:0 5px 0 var(--ink)}
-.pw h4{margin:0 0 8px;display:flex;align-items:center;gap:8px;font:700 17px var(--fd)}.pw h4 .av{width:34px;height:34px}
-.pw .chips{display:flex;flex-wrap:wrap;gap:6px;max-height:220px;overflow:auto}
-.wc-chip.sh{background:#8d86a8;color:#fff;opacity:.85}
-.mpr .acts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-#lbLang{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-@media(max-width:600px){.plc{min-height:88px}.plc .av{width:40px;height:40px}.inv{grid-template-columns:96px minmax(0,1fr)}.inv .qr{width:96px;height:96px}.pc{flex-basis:calc(50% - 6px);min-width:0;padding:10px 8px 8px}.pc .av{width:56px;height:56px}.pc .nm{font-size:17px}.pc .big b{font-size:26px}.pc .big small{font-size:10px}.pc .rk{font-size:18px}.mpc .nm{max-width:60px}}
+body.spect .mpbar{width:min(100%,1100px);gap:12px}
+body.spect .mpc{padding:4px 18px 4px 4px}body.spect .mpc .av{width:54px;height:54px}body.spect .mpc .nm{font-size:20px;max-width:180px}body.spect .mpc b{font-size:34px}body.spect .mpc small{font-size:13px}
+.hud .tvi{display:grid;place-items:center;font-size:36px;height:100%}
+/* resultados */
+.mpres{overflow:hidden}
+.wc-chip.sh{background:#8d86a8;color:#fff}
+.mpr.seq{--bt:4.5vh;--bw:clamp(130px,21vh,230px);position:relative;height:100%;color:#fff;overflow:hidden;cursor:pointer}
+.mpr.seq.small{--bt:98px;--bw:min(36vw,26vh)}
+.legend{position:absolute;left:50%;top:7vh;transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;transition:left .6s,top .6s,transform .6s;z-index:3;transform-origin:0 0}
+.legend .rc{display:flex;align-items:center;gap:10px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:14px;padding:8px 14px;font:800 clamp(14px,2.2vh,20px) var(--fb);white-space:nowrap;animation:rcin .45s backwards;animation-delay:calc(var(--d)*.75s);box-shadow:0 4px 0 var(--ink)}
+@keyframes rcin{from{opacity:0;translate:0 -18px;scale:.8}}
+.legend .rc span{color:#ffb020;font-size:1.15em}.legend .rc b{margin-left:auto;padding-left:14px;color:var(--coral)}
+.legmin .legend{left:12px;top:12px;transform:scale(.58)}.small.legmin .legend{transform:scale(.46)}
+.exph .legend .rc.ex{background:#c6ff3d;transition:background .3s}
+.sqqr{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}.sqqr .q{width:84px;height:84px;padding:3px}.sqqr small{background:var(--ink);border-radius:99px;padding:2px 10px;font:700 14px var(--fd)}
+.sqtop{position:absolute;left:50%;top:var(--bt);transform:translateX(-50%);display:flex;gap:12px;opacity:0;transition:opacity .5s,left .6s,top .6s,transform .6s;z-index:2}
+.legmin .sqtop{opacity:1}
+#sqBoard{width:var(--bw);max-width:none;background:rgba(27,18,56,.35)}
+#sqBoard div{font-size:calc(var(--bw)/9)}
+.sqbar{display:flex;flex-direction:column;align-items:flex-start;font:800 11px var(--fb);opacity:.95}.sqbar b{font:700 18px var(--fd)}
+.tube{flex:1;width:10px;border-radius:9px;background:rgba(0,0,0,.28);position:relative;overflow:hidden;margin:4px 0}.tube i{position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(#ffd23f,#c08bff);transition:height .3s}
+.sqtop.corner{left:12px;top:12px;transform:none}.sqtop.corner .sqbar{display:none}.sqtop.corner #sqBoard{width:calc(var(--bw)*.72)}.sqtop.gone{opacity:0}
+.sqword{position:absolute;left:50%;top:calc(var(--bt) + var(--bw) + 14px);transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:2}
+.wp{background:var(--ink);border:3px solid #fff;border-radius:99px;padding:5px 22px;font:700 clamp(20px,3.6vh,34px) var(--fd);letter-spacing:.04em;min-width:80px;text-align:center}
+.wv{background:#fff;color:var(--ink);border-radius:99px;padding:3px 10px;font:800 16px var(--fb);animation:pop .3s}
+.done .sqtop:not(.corner),.done .sqword{opacity:0;pointer-events:none}
+.banner{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);z-index:5;font:700 clamp(24px,5vh,50px) var(--fd);padding:10px 34px;border-radius:18px;background:var(--ink);border:4px solid #fff;color:#ffd23f;white-space:nowrap;animation:banin .45s;box-shadow:0 8px 0 rgba(0,0,0,.25);max-width:94vw;overflow:hidden;text-overflow:ellipsis}
+.banner.tilt{transform:translate(-50%,-50%) rotate(-5deg)}.banner.win{background:linear-gradient(#ff4f7b,#c6305a);color:#fff}
+@keyframes banin{from{opacity:0;scale:.3}70%{scale:1.08}}
+.pils{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:44vh;display:flex;align-items:flex-end;justify-content:center;gap:clamp(6px,1vw,14px);width:min(96vw,1200px)}
+.small .pils{height:40vh;gap:5px}
+.pil{position:relative;flex:0 1 clamp(70px,9vw,128px);height:calc(var(--h,.2)*100%);min-height:clamp(110px,16vh,150px);display:flex;flex-direction:column;align-items:center;text-align:center;background:linear-gradient(#4b2bd6,#2b1a8a);border:3px solid var(--ink);border-bottom:0;border-radius:18px 18px 0 0;padding:calc(clamp(26px,4vh,40px)) 4px 8px;transition:height .45s cubic-bezier(.3,1.4,.5,1)}
+.small .pil{flex:1 1 0;max-width:96px}
+.pil .top{position:absolute;top:calc(-1*clamp(28px,4vh,40px));left:50%;transform:translateX(-50%);display:flex;align-items:center}
+.pil .top .av{width:clamp(46px,7vh,72px);height:clamp(46px,7vh,72px)}
+.pil .sc{background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:1px 8px;font:700 clamp(16px,2.6vh,24px) var(--fd);margin-left:-10px;min-width:34px}
+.small .pil .top{flex-direction:column}.small .pil .sc{margin:-6px 0 0;font-size:15px}.small .pil{padding-top:46px}
+.pil .hostt{font:800 9px var(--fb);color:#6ee7ff;letter-spacing:.05em;min-height:10px}
+.pil .nm{display:block;max-width:100%;font:700 clamp(12px,1.9vh,18px) var(--fd);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pil small{font:800 clamp(9px,1.4vh,12px) var(--fb);opacity:.85}
+.pil .rkp{margin-top:auto;font:700 clamp(24px,5vh,48px) var(--fd);color:#ffd23f}
+.pil.win{background:linear-gradient(#8a63ff,#4b2bd6)}.pil.win .sc{background:#ffd23f}
+.pop{position:absolute;top:calc(-1*clamp(64px,9vh,90px));left:50%;transform:translateX(-50%);font:700 clamp(18px,3vh,26px) var(--fd);color:#fff;text-shadow:0 2px 0 var(--ink);opacity:0;white-space:nowrap}
+.pop.go{animation:popup 1s}.pop.x2::after{content:' ×2';color:#ffd23f}
+@keyframes popup{0%{opacity:0;translate:0 12px}20%{opacity:1}100%{opacity:0;translate:0 -26px}}
+.recb{position:absolute;top:calc(-1*clamp(120px,17vh,160px));left:50%;transform:translateX(-50%);width:clamp(64px,9vh,84px);height:clamp(64px,9vh,84px);display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--ink);border:3px solid #ffd23f;border-radius:50%;animation:banin .5s}
+.recb small{font:800 8px/1.1 var(--fb);color:#2ee6a6;text-transform:uppercase;text-align:center;opacity:1}.recb b{font:700 clamp(18px,3vh,24px) var(--fd)}
+.achban{position:absolute;left:50%;top:7vh;transform:translateX(-50%);display:flex;gap:12px;align-items:center;background:#fff;color:var(--ink);border:4px solid var(--ink);border-radius:20px;padding:12px 22px;box-shadow:0 6px 0 var(--ink);animation:cardin .4s;z-index:5;width:max-content;max-width:92vw}
+.achban span{font-size:clamp(30px,5vh,44px)}.achban b{display:block;font:700 clamp(18px,2.8vh,24px) var(--fd)}.achban small{font:700 clamp(13px,2vh,16px) var(--fb);color:var(--muted)}
+.balloon2{position:absolute;left:calc(24px + var(--bw)*.72 + 12px);top:16px;right:110px;max-width:600px;background:#fff;color:var(--ink);border-radius:18px;padding:10px 18px;border:3px solid var(--ink);animation:cardin .4s;z-index:3}
+.small .balloon2{left:12px;right:12px;top:calc(12px + var(--bw)*.72 + 14px)}
+.balloon2 .lbl{font:800 11px var(--fb);color:var(--coral);letter-spacing:.06em}.balloon2 p{margin:2px 0 0;font:700 clamp(16px,2.6vh,22px) var(--fb)}
+.finmsg{position:absolute;left:50%;top:6vh;transform:translateX(-50%);display:flex;gap:16px;align-items:center;z-index:3;width:max-content;max-width:92vw;animation:cardin .4s}
+.small .finmsg{flex-direction:column;gap:8px}
+.finmsg p{background:#fff;color:var(--ink);border-radius:18px;padding:12px 22px;font:800 clamp(16px,2.6vh,22px) var(--fb);border:3px solid var(--ink);margin:0}
+.mpnext{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff}.mpnext small{font:800 12px var(--fb)}.mpnext b{background:var(--ink);border:3px solid #fff;border-radius:99px;padding:2px 26px;font:700 26px var(--fd)}
+.seq .acts{position:absolute;left:50%;top:calc(6vh + 92px);transform:translateX(-50%);display:flex;gap:10px;z-index:3;flex-wrap:wrap;justify-content:center;width:max-content;max-width:94vw}
+.small .acts{top:calc(6vh + 150px)}
+.mpr.phone{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(12px,2.4vh,22px);padding:16px;color:#fff;text-align:center}
+.look .ic{font-size:clamp(44px,8vh,70px)}.look b{display:block;font:700 clamp(20px,3vh,28px) var(--fd)}
+.myres{position:relative;width:min(340px,100%);display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:24px;padding:16px;box-shadow:0 6px 0 var(--ink)}
+.myres .av{width:84px;height:84px}.myres .rk{font:700 26px var(--fd)}.myres .big{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.myres .big div{display:flex;flex-direction:column;background:var(--ink);color:#fff;border-radius:16px;padding:6px}.myres .big b{font:700 34px var(--fd)}.myres .big small{font:800 11px var(--fb);text-transform:uppercase}.myres .big div:first-child b{color:var(--sel)}
+.myres .recb{position:static;transform:none;width:auto;height:auto;border-radius:99px;padding:4px 12px;color:#2ee6a6;font:800 13px var(--fb)}
+.phone .acts{display:flex;flex-direction:column;gap:8px;width:min(340px,100%)}
+
+body.party .tray{width:min(100%,560px,calc(100svh - 330px))}
+body.spect .main{grid-template-columns:minmax(0,1fr)}body.spect .side{display:none}body.spect .tray{width:min(100%,640px,calc(100svh - 330px))}
+@media(max-width:900px){body.party .side{display:none}}
+body:has(#vMpRes:not([hidden])),body.menu{overflow:hidden}
+.qrp{width:270px}.qrp .b-sun{font-size:15px;white-space:nowrap}
+.legmin .sqtop.corner,.sqtop.corner{top:calc(12px + 3*clamp(14px,2.2vh,20px)*2.7*.58 + 14px)}
+.small .sqtop.corner{top:calc(12px + 3*13px*3*.46 + 10px)}
+.balloon2{top:calc(12px + 3*clamp(14px,2.2vh,20px)*2.7*.58 + 14px)}
+.small .legend{width:92vw}.small .legend .rc{font-size:13px;white-space:normal;padding:6px 10px}.small.legmin .legend{width:92vw}
+@media(max-width:760px){.homewrap{flex-direction:column}}
+@media(max-height:780px){.mode{min-height:66px}.mode svg{width:50px;height:50px}.card{gap:10px;padding:16px}}
 
 </style>
 </head>
@@ -352,20 +430,21 @@ body.spect .mpc{padding:4px 18px 4px 4px}body.spect .mpc .av{width:52px;height:5
 <div id="dstripes" class="danger-stripes" hidden></div>
 
 <!-- início -->
-<div class="ov" id="vHome">
+<div class="ov" id="vHome"><div class="homewrap">
   <div class="card">
     <div class="logo" id="logo"></div>
-    <div class="prof"><span class="av" id="pAv"></span><div><div class="nm" id="pName"></div><div class="note" id="pStreak"></div></div><button class="b-sun" id="bEditProf" data-t="edit"></button></div>
+    <div class="prof"><span class="av" id="pAv"></span><div><div class="nm" id="pName"></div><div class="note" id="pStreak"></div></div><button class="b-sun" id="bEditProf" data-t="edit"></button><button class="b-ghost ico" id="bInvite" hidden>👥</button></div>
     <div class="modes">
       <button class="mode b-pri" id="bCont" hidden><span id="icCont"></span><span><b data-t="cont"></b><small id="contSub"></small></span></button>
       <button class="mode b-cor" id="bDaily"><span id="icDaily"></span><span><b id="dailyTxt"></b><small id="dailySub"></small></span></button>
       <button class="mode" id="bClassic"><span id="icClassic"></span><span><b data-t="classic"></b><small data-t="classicSub"></small></span></button>
       <button class="mode b-sun" id="bSurv"><span id="icSurv"></span><span><b data-t="surv"></b><small data-t="survSub"></small></span></button>
-      <button class="mode b-mint" id="bFriends"><span id="icFriends"></span><span><b id="frT"></b><small id="frS"></small></span></button>
     </div>
     <div class="load note" id="load" style="text-align:center"></div>
     <div class="row"><button id="bAch" data-t="achs"></button><button id="bStats" data-t="stats"></button><button id="bSet" data-t="settings"></button></div>
   </div>
+  <aside class="qrp" id="qrPanel" hidden><b id="qpT"></b><div class="q" id="qpQR"></div><small id="qpOr"></small><div class="code" id="qpCode"></div><button class="b-sun" id="bQpMe"></button><div class="qpj"><small id="qpHave"></small><div class="joinrow"><input type="text" id="qpIn" maxlength="6" autocomplete="off" spellcheck="false"><button class="b-cor" id="bQpJoin"></button></div></div></aside>
+</div>
 </div>
 
 <div class="ov" id="vClassic" hidden>
@@ -431,29 +510,33 @@ body.spect .mpc{padding:4px 18px 4px 4px}body.spect .mpc .av{width:52px;height:5
   </div>
 </div>
 
-<div class="ov" id="vRoom" hidden>
-  <div class="card">
-    <div class="topbar"><button class="back" data-back aria-label="Voltar">◀</button><span class="t" id="rmT"></span></div>
-    <button class="b-pri" id="bCreate"></button>
-    <div class="or" id="rmOr"></div>
-    <div class="opt"><label for="codeIn" id="rmCodeL"></label><div class="joinrow"><input type="text" id="codeIn" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="b-cor" id="bJoin"></button></div></div>
-    <p class="note" id="roomMsg" style="text-align:center;font-weight:800"></p>
+<div class="ov scr" id="vScreen" hidden>
+  <div class="scp" id="scPlayers"></div>
+  <div class="scc"><span class="cnt" id="scCount"></span></div>
+  <div class="scmain">
+    <div class="logo" id="scLogo"></div>
+    <div class="scqr"><div class="q" id="scQR"></div><div><small id="scScan"></small><div class="code" id="scCode"></div></div></div>
+    <p id="scMsg"></p><small id="scCfg"></small>
+    <button class="b-sun" id="bMeToo"></button>
   </div>
 </div>
 <div class="ov" id="vLobby" hidden>
-  <div class="card lobby">
-    <div class="topbar"><span class="t" id="lbT"></span></div>
-    <div class="inv"><div class="qr" id="lbQR"></div><div><small id="lbInv"></small><div class="code" id="lbCode"></div><button class="b-ghost" id="bCopyLink"></button></div></div>
-    <div class="opt"><label id="lbPl"></label><div class="pls" id="lbPlayers"></div></div>
-    <div class="opt"><label data-t="lLang"></label><div class="seg" id="lbLang"></div></div>
-    <div class="opt"><label data-t="gridSize"></label><div class="seg" id="lbSize"></div></div>
-    <div class="opt"><label><span data-t="duration"></span>: <span id="lbDurT"></span></label><input type="range" id="lbDur" min="30" max="180" step="30"></div>
-    <div class="opt"><label class="tvt"><input type="checkbox" id="lbTv"><span id="lbTvL"></span></label><small class="note" id="lbTvN"></small></div>
-    <p class="note" id="lbMsg"></p>
-    <button class="b-pri" id="bStartR"></button>
-    <button id="bLeave"></button>
+  <div class="lob">
+    <div class="lbtop"><button class="ico b-ghost" id="bLbExit" aria-label="Sair">✕</button><span id="lbCode"></span><button class="ico b-ghost" id="bLbInv" aria-label="QR">▦</button></div>
+    <div class="lbpl" id="lbPlayers"></div>
+    <div class="lbcard"><span class="tag" id="lbHostTag" hidden></span><span class="av" id="lbAv"></span><b id="lbName"></b></div>
+    <p id="lbMsg"></p>
+    <small id="lbCfgT"></small>
+    <div class="lbcfg" id="lbCfg" hidden>
+      <div><span id="lbLangL"></span><select id="lbLang"></select></div>
+      <div><span id="lbGridL"></span><div class="seg" id="lbGrid"><button data-v="4">4×4</button><button data-v="5">5×5</button><button data-v="6">6×6</button></div></div>
+      <div><span id="lbTimeL"></span><div class="seg" id="lbTime"><button data-v="60">1:00</button><button data-v="90">1:30</button><button data-v="120">2:00</button><button data-v="180">3:00</button></div></div>
+    </div>
+    <button class="b-pri" id="bLbStart" hidden></button>
   </div>
 </div>
+<div class="ov" id="vInvite" hidden><div class="card inv2"><b id="ivT"></b><div class="q" id="ivQR"></div><small id="ivOr"></small><div class="code" id="ivCode"></div><button class="b-cor" id="bIvCopy"></button><button id="bIvClose"></button></div></div>
+<div class="ov" id="mpWords" hidden></div>
 <div class="res mpres" id="vMpRes" hidden><div class="mpr" id="mpR"></div></div>
 <div class="res" id="vRes" hidden>
   <div class="rs" id="rs">
@@ -659,9 +742,9 @@ function achCard(a,v,from){const i=achInfo(a,v);const fv=from===undefined?v:from
   return `<div class="ach"><div class="ic">${a.ic}</div><div><h4>${esc(i.title)} <em>Nv.${Math.max(1,i.level+(i.max?0:1))}</em></h4><p>${esc(i.desc)}</p><div class="bar"><i style="width:${fp*100}%" data-to="${i.pct*100}"></i><span>${a.c==='surv'?fmt(Math.min(v,i.tgt))+' / '+fmt(i.tgt):Math.min(v,i.tgt)+' / '+i.tgt}</span></div></div></div>`}
 
 /* ---------- navegação ---------- */
-const VIEWS=['vHome','vClassic','vSurv','vProfile','vSet','vStats','vAch','vPause','vRoom','vLobby'];
+const VIEWS=['vHome','vClassic','vSurv','vProfile','vSet','vStats','vAch','vPause','vScreen','vLobby'];
 let navStack=[];
-function view(id,push=true){VIEWS.forEach(v=>$('#'+v).hidden=v!==id);if(push)navStack.push(id)}
+function view(id,push=true){VIEWS.forEach(v=>$('#'+v).hidden=v!==id);if(push)navStack.push(id);document.body.classList.toggle('menu',!(G&&G.running))}
 function back(){navStack.pop();const p=navStack.pop()||'vHome';view(p)}
 document.addEventListener('click',e=>{if(e.target.closest('[data-back]'))back()});
 function hideViews(){VIEWS.forEach(v=>$('#'+v).hidden=true)}
@@ -672,7 +755,7 @@ function wipe(){return new Promise(res=>{const w=document.createElement('div');w
 /* ---------- início ---------- */
 function validSave(){const s=store.get('save',null);if(!s||s.v!==3||!s.g)return null;if(s.mode==='daily'&&s.date!==today()){store.del('save');return null}return s}
 function renderHome(){const p=prof();$('#pAv').innerHTML=avatar(p.av,'happy');$('#pName').textContent=p.name;const st=streakOf(S.lang,today());$('#pStreak').textContent=(st?L.streak(st)+' · ':'')+NAME[S.lang];
-  $('#icDaily').innerHTML=IC.daily;$('#icFriends').innerHTML=IC.friends;renderRoomTxt();$('#icClassic').innerHTML=IC.classic;$('#icSurv').innerHTML=IC.surv;$('#icCont').innerHTML=IC.cont;
+  $('#icDaily').innerHTML=IC.daily;mpHomeUI();$('#icClassic').innerHTML=IC.classic;$('#icSurv').innerHTML=IC.surv;$('#icCont').innerHTML=IC.cont;
   const td=today(),dn=dayNum(td),h=store.get('hist_'+S.lang,{}),done=h[td];
   $('#dailyTxt').textContent=(done?L.dailyDone:L.daily)+dn;$('#dailySub').textContent=done?L.dailyDoneSub(done.score):L.dailySub;
   const sv=validSave();$('#bCont').hidden=!sv;if(sv)$('#contSub').textContent=(sv.mode==='surv'?L.surv:sv.mode==='daily'?L.daily+sv.dn:L.classic+' '+sv.N+'×'+sv.N)+' · '+NAME[sv.lang]}
@@ -692,7 +775,7 @@ $('#bCont').onclick=()=>{const s=validSave();if(s)startGame(s.mode,s)};
 function openProfile(first){const p=prof();$('#nameIn').value=p.name;let sel=p.av;
   const draw=()=>{$('#avs').innerHTML=AV.map(a=>`<button data-av="${a.id}" aria-pressed="${a.id===sel}" aria-label="${a.id}">${avatar(a.id,a.id===sel?'happy':'idle')}</button>`).join('')};draw();
   $('#avs').onclick=e=>{const b=e.target.closest('[data-av]');if(!b)return;sel=b.dataset.av;draw();beep(600,.06)};
-  $('#bSaveProf').onclick=()=>{const nm=$('#nameIn').value.trim().slice(0,12)||L.newPlayer;store.set('profile',{name:nm,av:sel});setHud();renderHome();setReact('idle');navStack=[];view('vHome');if(mpS.pend){const c=mpS.pend;mpS.pend=null;renderRoomTxt();view('vRoom');$('#codeIn').value=c;mpJoin(c)}};
+  $('#bSaveProf').onclick=()=>{const nm=$('#nameIn').value.trim().slice(0,12)||L.newPlayer;store.set('profile',{name:nm,av:sel});setHud();renderHome();setReact('idle');navStack=[];view('vHome');mpAfterProfile();};
   view('vProfile');if(first)$('#vProfile [data-back]').hidden=true;else $('#vProfile [data-back]').hidden=false}
 function renderClassic(){const u=UNL();const sizes=[[4,L.sz4,1],[5,L.sz5,u.g5],[6,L.sz6,u.g6]];if(!sizes.find(x=>x[0]==S.size&&x[2]))S.size=4;
   $('#sizes').innerHTML=sizes.map(([n,lb,ok])=>`<button data-n="${n}" aria-pressed="${S.size==n}" ${ok?'':'disabled'}><b>${n}×${n}</b><small>${esc(lb)}</small>${ok?'':`<small class="lock">${esc(L.locked)}</small>`}</button>`).join('');
@@ -805,10 +888,10 @@ function pause(){if(!G||!G.running||G.paused||G.mode==='party')return;G.paused=t
 function resume(){if(!G||!G.running)return;G.paused=false;tray.classList.remove('veil');hideViews()}
 $('#bResume').onclick=resume;$('#bEnd').onclick=()=>{hideViews();tray.classList.remove('veil');G.paused=false;endGame()};
 $('#bQuit').onclick=()=>{save();G.running=false;clearInterval(G.iv);danger(false);goHome()};
-$('#bPause').onclick=()=>{if(mpS.code&&G&&G.mode==='party'){if(confirm(ML().leaveQ))mpLeave();return}if(G&&G.running)pause();else goHome()};
+$('#bPause').onclick=()=>{if(mpS.code&&G&&G.mode==='party'){if(confirm(ML().leaveQ))mpLeave().then(async()=>{await goHome();if(isDesk())mpBoot(true)});return}if(G&&G.running)pause();else goHome()};
 $('#bSound').onclick=()=>{S.sound=+S.sound?0:1;store.set('cfg',S);setHud();syncSeg()};
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
-async function goHome(){await wipe();$('#vRes').hidden=true;$('#vMpRes').hidden=true;$('#mpbar').hidden=true;document.body.className='m-classic';navStack=[];view('vHome');setHud();renderHome()}
+async function goHome(){await wipe();$('#vRes').hidden=true;$('#vMpRes').hidden=true;$('#mpbar').hidden=true;$('#vInvite').hidden=true;$('#mpWords').hidden=true;document.body.className='m-classic';navStack=[];view('vHome');setHud();renderHome()}
 function setCtl(){const tap=S.ctl==='tap'&&G&&G.running!==undefined;$('#bOk').hidden=$('#bClr').hidden=!(S.ctl==='tap')}
 
 /* ---------- fim e resultado ---------- */
@@ -936,16 +1019,23 @@ $('#bRot').onclick=rotate;
 
 /* ---------- multijogador (salas) ---------- */
 const FBCFG={apiKey:"AIzaSyB6ELTwyjNgspuwwk18v4cZyEUtUYB7qbQ",authDomain:"embaralho.firebaseapp.com",databaseURL:"https://embaralho-default-rtdb.firebaseio.com",projectId:"embaralho",storageBucket:"embaralho.firebasestorage.app",messagingSenderId:"46441362369",appId:"1:46441362369:web:1292e9de17d39c0745f540"};
-const MOCK=/[?&]mock=1/.test(location.search),MAXP=8,CODEABC='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const QS=new URLSearchParams(location.search),MOCK=QS.get('mock')==='1',MAXP=8,CODEABC='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',CODELEN=6;
+const isDesk=()=>QS.get('dev')?QS.get('dev')==='desk':(matchMedia('(hover:hover) and (pointer:fine)').matches&&innerWidth>=900);
 const MPT={
-pt:{friends:'Jogar com amigos',friendsSub:'Até 8 pessoas, cada uma no seu celular',create:'Criar sala',or:'ou entre numa sala',code:'Código da sala',join:'Entrar',room:'Sala',invite:'Convide: leia o QR code ou digite o código em embaralho.com.br',copyLink:'Copiar link',copied:'Link copiado!',players:n=>`Jogadores (${n}/8)`,host:'anfitrião',you:'você',waitHost:'Aguardando o anfitrião começar…',tv:'Esta tela é só o placar (telão)',tvNote:'Para notebook ou TV: esta tela mostra o tabuleiro e o placar, mas não joga.',tvName:'Telão',start:'Começar partida',leave:'Sair da sala',full:'Sala cheia (máximo de 8 jogadores).',notFound:'Sala não encontrada. Confira o código.',needPlayers:'A sala precisa de pelo menos 1 jogador.',connecting:'Conectando…',netErr:'Não foi possível conectar. Verifique a internet e tente de novo.',inProgress:'Partida em andamento. Você entra na próxima.',calc:'Juntando as palavras de todos…',result:'Resultado da sala',words:n=>n===1?'palavra':'palavras',points:n=>n===1?'ponto':'pontos',shared:'repetida: vale 1 ponto',roomLong:'Palavra mais longa da sala',boardLong:'Maior palavra possível',nobody:'ninguém achou',again:'Nova partida',toLobby:'Voltar à sala',leaveQ:'Sair da sala? A partida continua para os outros.',closed:'A sala foi encerrada.',newHost:'Agora você é o anfitrião.',rule:'Palavra que mais de um jogador achou vale 1 ponto.',noWords:'nenhuma palavra',playing:'jogando'},
-en:{friends:'Play with friends',friendsSub:'Up to 8 people, each on their own phone',create:'Create room',or:'or join a room',code:'Room code',join:'Join',room:'Room',invite:'Invite: scan the QR code or type the code at embaralho.com.br',copyLink:'Copy link',copied:'Link copied!',players:n=>`Players (${n}/8)`,host:'host',you:'you',waitHost:'Waiting for the host to start…',tv:'This screen is only the scoreboard (TV mode)',tvNote:'For a laptop or TV: this screen shows the board and the scores, but does not play.',tvName:'TV',start:'Start game',leave:'Leave room',full:'Room is full (max 8 players).',notFound:'Room not found. Check the code.',needPlayers:'The room needs at least 1 player.',connecting:'Connecting…',netErr:'Could not connect. Check your internet and try again.',inProgress:'Game in progress. You will join the next one.',calc:'Collecting everyone’s words…',result:'Room results',words:n=>n===1?'word':'words',points:n=>n===1?'point':'points',shared:'shared: worth 1 point',roomLong:'Longest word in the room',boardLong:'Longest possible word',nobody:'nobody found it',again:'New game',toLobby:'Back to room',leaveQ:'Leave the room? The game continues for the others.',closed:'The room was closed.',newHost:'You are now the host.',rule:'A word found by more than one player is worth 1 point.',noWords:'no words',playing:'playing'},
-es:{friends:'Jugar con amigos',friendsSub:'Hasta 8 personas, cada una en su móvil',create:'Crear sala',or:'o entra en una sala',code:'Código de la sala',join:'Entrar',room:'Sala',invite:'Invita: escanea el QR o escribe el código en embaralho.com.br',copyLink:'Copiar enlace',copied:'¡Enlace copiado!',players:n=>`Jugadores (${n}/8)`,host:'anfitrión',you:'tú',waitHost:'Esperando a que el anfitrión empiece…',tv:'Esta pantalla es solo el marcador (TV)',tvNote:'Para portátil o TV: muestra el tablero y el marcador, pero no juega.',tvName:'TV',start:'Empezar partida',leave:'Salir de la sala',full:'Sala llena (máximo 8 jugadores).',notFound:'Sala no encontrada. Revisa el código.',needPlayers:'La sala necesita al menos 1 jugador.',connecting:'Conectando…',netErr:'No se pudo conectar. Revisa internet e inténtalo de nuevo.',inProgress:'Partida en curso. Entrarás en la próxima.',calc:'Reuniendo las palabras de todos…',result:'Resultado de la sala',words:n=>n===1?'palabra':'palabras',points:n=>n===1?'punto':'puntos',shared:'repetida: vale 1 punto',roomLong:'Palabra más larga de la sala',boardLong:'Palabra más larga posible',nobody:'nadie la encontró',again:'Nueva partida',toLobby:'Volver a la sala',leaveQ:'¿Salir de la sala? La partida sigue para los demás.',closed:'La sala se cerró.',newHost:'Ahora eres el anfitrión.',rule:'Una palabra que encontró más de un jugador vale 1 punto.',noWords:'ninguna palabra',playing:'jugando'},
-fr:{friends:'Jouer entre amis',friendsSub:'Jusqu’à 8 personnes, chacune sur son téléphone',create:'Créer un salon',or:'ou rejoindre un salon',code:'Code du salon',join:'Entrer',room:'Salon',invite:'Invitez : scannez le QR code ou tapez le code sur embaralho.com.br',copyLink:'Copier le lien',copied:'Lien copié !',players:n=>`Joueurs (${n}/8)`,host:'hôte',you:'vous',waitHost:'En attente du lancement par l’hôte…',tv:'Cet écran sert seulement de tableau des scores (TV)',tvNote:'Pour un ordinateur ou une TV : affiche la grille et les scores, sans jouer.',tvName:'TV',start:'Lancer la partie',leave:'Quitter le salon',full:'Salon complet (8 joueurs max).',notFound:'Salon introuvable. Vérifiez le code.',needPlayers:'Il faut au moins 1 joueur.',connecting:'Connexion…',netErr:'Connexion impossible. Vérifiez internet et réessayez.',inProgress:'Partie en cours. Vous jouerez la prochaine.',calc:'On rassemble les mots de tous…',result:'Résultats du salon',words:n=>n===1?'mot':'mots',points:n=>n===1?'point':'points',shared:'en double : vaut 1 point',roomLong:'Mot le plus long du salon',boardLong:'Mot le plus long possible',nobody:'personne ne l’a trouvé',again:'Nouvelle partie',toLobby:'Retour au salon',leaveQ:'Quitter le salon ? La partie continue pour les autres.',closed:'Le salon a été fermé.',newHost:'Vous êtes maintenant l’hôte.',rule:'Un mot trouvé par plusieurs joueurs vaut 1 point.',noWords:'aucun mot',playing:'en jeu'},
-de:{friends:'Mit Freunden spielen',friendsSub:'Bis zu 8 Personen, jede am eigenen Handy',create:'Raum erstellen',or:'oder einem Raum beitreten',code:'Raumcode',join:'Beitreten',room:'Raum',invite:'Einladen: QR-Code scannen oder Code auf embaralho.com.br eingeben',copyLink:'Link kopieren',copied:'Link kopiert!',players:n=>`Spieler (${n}/8)`,host:'Gastgeber',you:'du',waitHost:'Warten, bis der Gastgeber startet…',tv:'Dieser Bildschirm zeigt nur die Punkte (TV)',tvNote:'Für Laptop oder TV: zeigt Brett und Punkte, spielt aber nicht mit.',tvName:'TV',start:'Spiel starten',leave:'Raum verlassen',full:'Raum ist voll (max. 8 Spieler).',notFound:'Raum nicht gefunden. Code prüfen.',needPlayers:'Der Raum braucht mindestens 1 Spieler.',connecting:'Verbinde…',netErr:'Keine Verbindung. Internet prüfen und erneut versuchen.',inProgress:'Spiel läuft. Du bist beim nächsten dabei.',calc:'Sammle die Wörter aller…',result:'Ergebnis des Raums',words:n=>n===1?'Wort':'Wörter',points:n=>n===1?'Punkt':'Punkte',shared:'doppelt: zählt 1 Punkt',roomLong:'Längstes Wort im Raum',boardLong:'Längstes mögliches Wort',nobody:'niemand hat es gefunden',again:'Neues Spiel',toLobby:'Zurück zum Raum',leaveQ:'Raum verlassen? Das Spiel läuft für die anderen weiter.',closed:'Der Raum wurde geschlossen.',newHost:'Du bist jetzt der Gastgeber.',rule:'Ein Wort, das mehrere Spieler fanden, zählt 1 Punkt.',noWords:'keine Wörter',playing:'spielt'},
-it:{friends:'Gioca con gli amici',friendsSub:'Fino a 8 persone, ognuna sul proprio telefono',create:'Crea stanza',or:'o entra in una stanza',code:'Codice stanza',join:'Entra',room:'Stanza',invite:'Invita: inquadra il QR o scrivi il codice su embaralho.com.br',copyLink:'Copia link',copied:'Link copiato!',players:n=>`Giocatori (${n}/8)`,host:'host',you:'tu',waitHost:'In attesa che l’host inizi…',tv:'Questo schermo è solo il tabellone (TV)',tvNote:'Per portatile o TV: mostra griglia e punteggi, ma non gioca.',tvName:'TV',start:'Inizia partita',leave:'Esci dalla stanza',full:'Stanza piena (max 8 giocatori).',notFound:'Stanza non trovata. Controlla il codice.',needPlayers:'Serve almeno 1 giocatore.',connecting:'Connessione…',netErr:'Connessione non riuscita. Controlla internet e riprova.',inProgress:'Partita in corso. Entrerai nella prossima.',calc:'Raccolgo le parole di tutti…',result:'Risultato della stanza',words:n=>n===1?'parola':'parole',points:n=>n===1?'punto':'punti',shared:'ripetuta: vale 1 punto',roomLong:'Parola più lunga della stanza',boardLong:'Parola più lunga possibile',nobody:'nessuno l’ha trovata',again:'Nuova partita',toLobby:'Torna alla stanza',leaveQ:'Uscire dalla stanza? La partita continua per gli altri.',closed:'La stanza è stata chiusa.',newHost:'Ora sei tu l’host.',rule:'Una parola trovata da più giocatori vale 1 punto.',noWords:'nessuna parola',playing:'in gioco'}};
+pt:{scan:'Jogue com os amigos: leia com a câmera do celular',orCode:'ou entre em embaralho.com.br e digite',haveCode:'Tem um código?',join:'Entrar',meToo:'Também vou jogar',waitStart:n=>`Esperando ${n} começar…`,waitPlayers:'Esperando alguém entrar…',host:'Anfitrião',youHost:'Você é o anfitrião!',start:'Começar',leave:'Sair',leaveQ:'Sair da sala? A partida continua para os outros.',invite:'Convidar',room:'Sala',copyLink:'Copiar link',copied:'Link copiado!',close:'Fechar',full:'Sala cheia (máximo de 8 jogadores).',notFound:'Sala não encontrada. Confira o código.',netErr:'Sem conexão com o servidor. Verifique a internet.',inProgress:'Partida em andamento. Você entra na próxima.',calc:'Juntando as palavras de todos…',tvName:'Tela',lookTV:'Olhe para a tela grande!',lookPhone:'Pegue o celular: o tabuleiro está nele!',r3:'Palavras de 3 letras',r3v:'1 ponto',rAdd:'Cada letra a mais',rAddv:'+1 ponto',rEx:'Palavra que só você achou',rExv:'vale o dobro',total:'Total de palavras',counted:'Contadas',exclusive:'Palavras exclusivas',words:n=>n===1?'palavra':'palavras',pts:n=>n===1?'ponto':'pontos',win:['Que vitória, {n}!','Mandou muito, {n}!','Show de palavras, {n}!'],tie:'Empate!',record:'Novo recorde!',longest:'Maior palavra do tabuleiro',longFound:(w,n)=>`${w}: quem achou foi ${n}!`,longMissed:w=>`Ninguém viu ${w}!`,again:'Valeu, pessoal! Bora mais uma?',nextIn:'Nova partida em',playNow:'Jogar agora',myWords:'Minhas palavras',toHome:'Voltar',rank:k=>`${k}º lugar`,yourScore:'Sua pontuação',shared:'repetida',excl:'só sua: ×2',noWords:'Nenhuma palavra.',newHost:'Agora você é o anfitrião.',grid:'Grade',time:'Tempo',lang:'Idioma',
+  ach:[['Todo mundo no ritmo','Todos acharam pelo menos 10 palavras.'],['Palavra gigante','Alguém achou uma palavra de 7 letras ou mais.'],['Mentes parecidas','Vocês acharam 5 ou mais palavras iguais.'],['Cada um na sua','Ninguém repetiu palavra nenhuma!']]},
+en:{scan:'Play with friends: scan with your phone camera',orCode:'or go to embaralho.com.br and type',haveCode:'Have a code?',join:'Join',meToo:'I’ll play too',waitStart:n=>`Waiting for ${n} to start…`,waitPlayers:'Waiting for someone to join…',host:'Host',youHost:'You are the host!',start:'Start',leave:'Leave',leaveQ:'Leave the room? The game continues for the others.',invite:'Invite',room:'Room',copyLink:'Copy link',copied:'Link copied!',close:'Close',full:'Room is full (max 8 players).',notFound:'Room not found. Check the code.',netErr:'No connection to the server. Check your internet.',inProgress:'Game in progress. You’ll join the next one.',calc:'Collecting everyone’s words…',tvName:'Screen',lookTV:'Look at the big screen!',lookPhone:'Grab your phone: the board is there!',r3:'3-letter words',r3v:'1 point',rAdd:'Each extra letter',rAddv:'+1 point',rEx:'Word only you found',rExv:'counts double',total:'Total words',counted:'Counted',exclusive:'Exclusive words',words:n=>n===1?'word':'words',pts:n=>n===1?'point':'points',win:['What a win, {n}!','Crushed it, {n}!','Word wizard, {n}!'],tie:'It’s a tie!',record:'New record!',longest:'Longest word on the board',longFound:(w,n)=>`${w}: found by ${n}!`,longMissed:w=>`Nobody spotted ${w}!`,again:'Thanks, everyone! One more?',nextIn:'Next game in',playNow:'Play now',myWords:'My words',toHome:'Back',rank:k=>`#${k}`,yourScore:'Your score',shared:'shared',excl:'only yours: ×2',noWords:'No words.',newHost:'You are now the host.',grid:'Grid',time:'Time',lang:'Language',
+  ach:[['Everyone in rhythm','Everybody found at least 10 words.'],['Giant word','Someone found a 7+ letter word.'],['Great minds','You found 5 or more of the same words.'],['Each to their own','Nobody repeated a single word!']]},
+es:{scan:'Juega con amigos: escanea con la cámara del móvil',orCode:'o entra en embaralho.com.br y escribe',haveCode:'¿Tienes un código?',join:'Entrar',meToo:'Yo también juego',waitStart:n=>`Esperando a que ${n} empiece…`,waitPlayers:'Esperando a que alguien entre…',host:'Anfitrión',youHost:'¡Eres el anfitrión!',start:'Empezar',leave:'Salir',leaveQ:'¿Salir de la sala? La partida sigue para los demás.',invite:'Invitar',room:'Sala',copyLink:'Copiar enlace',copied:'¡Enlace copiado!',close:'Cerrar',full:'Sala llena (máximo 8 jugadores).',notFound:'Sala no encontrada. Revisa el código.',netErr:'Sin conexión con el servidor. Revisa internet.',inProgress:'Partida en curso. Entrarás en la próxima.',calc:'Reuniendo las palabras de todos…',tvName:'Pantalla',lookTV:'¡Mira la pantalla grande!',lookPhone:'¡Toma el móvil: el tablero está ahí!',r3:'Palabras de 3 letras',r3v:'1 punto',rAdd:'Cada letra extra',rAddv:'+1 punto',rEx:'Palabra que solo tú encontraste',rExv:'vale el doble',total:'Total de palabras',counted:'Contadas',exclusive:'Palabras exclusivas',words:n=>n===1?'palabra':'palabras',pts:n=>n===1?'punto':'puntos',win:['¡Qué victoria, {n}!','¡Arrasaste, {n}!','¡Mago de palabras, {n}!'],tie:'¡Empate!',record:'¡Nuevo récord!',longest:'Palabra más larga del tablero',longFound:(w,n)=>`${w}: la encontró ${n}!`,longMissed:w=>`¡Nadie vio ${w}!`,again:'¡Gracias a todos! ¿Otra?',nextIn:'Nueva partida en',playNow:'Jugar ya',myWords:'Mis palabras',toHome:'Volver',rank:k=>`${k}.º`,yourScore:'Tu puntuación',shared:'repetida',excl:'solo tuya: ×2',noWords:'Ninguna palabra.',newHost:'Ahora eres el anfitrión.',grid:'Cuadrícula',time:'Tiempo',lang:'Idioma',
+  ach:[['Todos con ritmo','Todos encontraron al menos 10 palabras.'],['Palabra gigante','Alguien encontró una palabra de 7+ letras.'],['Mentes parecidas','Encontraron 5 o más palabras iguales.'],['Cada uno a lo suyo','¡Nadie repitió ninguna palabra!']]},
+fr:{scan:'Jouez entre amis : scannez avec votre téléphone',orCode:'ou allez sur embaralho.com.br et tapez',haveCode:'Vous avez un code ?',join:'Entrer',meToo:'Je joue aussi',waitStart:n=>`En attente de ${n}…`,waitPlayers:'En attente de joueurs…',host:'Hôte',youHost:'Vous êtes l’hôte !',start:'Commencer',leave:'Quitter',leaveQ:'Quitter le salon ? La partie continue pour les autres.',invite:'Inviter',room:'Salon',copyLink:'Copier le lien',copied:'Lien copié !',close:'Fermer',full:'Salon complet (8 joueurs max).',notFound:'Salon introuvable. Vérifiez le code.',netErr:'Pas de connexion au serveur. Vérifiez internet.',inProgress:'Partie en cours. Vous jouerez la prochaine.',calc:'On rassemble les mots de tous…',tvName:'Écran',lookTV:'Regardez le grand écran !',lookPhone:'Prenez votre téléphone : la grille est dessus !',r3:'Mots de 3 lettres',r3v:'1 point',rAdd:'Chaque lettre en plus',rAddv:'+1 point',rEx:'Mot trouvé par vous seul',rExv:'compte double',total:'Total de mots',counted:'Comptés',exclusive:'Mots exclusifs',words:n=>n===1?'mot':'mots',pts:n=>n===1?'point':'points',win:['Quelle victoire, {n} !','Impressionnant, {n} !','Magicien des mots, {n} !'],tie:'Égalité !',record:'Nouveau record !',longest:'Mot le plus long de la grille',longFound:(w,n)=>`${w} : trouvé par ${n} !`,longMissed:w=>`Personne n’a vu ${w} !`,again:'Merci à tous ! On en refait une ?',nextIn:'Prochaine partie dans',playNow:'Jouer maintenant',myWords:'Mes mots',toHome:'Retour',rank:k=>`${k}e`,yourScore:'Votre score',shared:'en double',excl:'à vous seul : ×2',noWords:'Aucun mot.',newHost:'Vous êtes maintenant l’hôte.',grid:'Grille',time:'Temps',lang:'Langue',
+  ach:[['Tout le monde en rythme','Chacun a trouvé au moins 10 mots.'],['Mot géant','Quelqu’un a trouvé un mot de 7+ lettres.'],['Grands esprits','Vous avez trouvé 5 mots identiques ou plus.'],['Chacun son style','Personne n’a répété un seul mot !']]},
+de:{scan:'Mit Freunden spielen: mit der Handykamera scannen',orCode:'oder auf embaralho.com.br eingeben',haveCode:'Hast du einen Code?',join:'Beitreten',meToo:'Ich spiele auch',waitStart:n=>`Warten auf ${n}…`,waitPlayers:'Warten auf Mitspieler…',host:'Gastgeber',youHost:'Du bist der Gastgeber!',start:'Starten',leave:'Verlassen',leaveQ:'Raum verlassen? Das Spiel läuft für die anderen weiter.',invite:'Einladen',room:'Raum',copyLink:'Link kopieren',copied:'Link kopiert!',close:'Schließen',full:'Raum ist voll (max. 8 Spieler).',notFound:'Raum nicht gefunden. Code prüfen.',netErr:'Keine Verbindung zum Server. Internet prüfen.',inProgress:'Spiel läuft. Du bist beim nächsten dabei.',calc:'Sammle die Wörter aller…',tvName:'Bildschirm',lookTV:'Schau auf den großen Bildschirm!',lookPhone:'Nimm dein Handy: dort ist das Brett!',r3:'Wörter mit 3 Buchstaben',r3v:'1 Punkt',rAdd:'Jeder weitere Buchstabe',rAddv:'+1 Punkt',rEx:'Wort, das nur du fandest',rExv:'zählt doppelt',total:'Wörter insgesamt',counted:'Gezählt',exclusive:'Exklusive Wörter',words:n=>n===1?'Wort':'Wörter',pts:n=>n===1?'Punkt':'Punkte',win:['Was für ein Sieg, {n}!','Stark gespielt, {n}!','Wortzauber, {n}!'],tie:'Unentschieden!',record:'Neuer Rekord!',longest:'Längstes Wort im Brett',longFound:(w,n)=>`${w}: gefunden von ${n}!`,longMissed:w=>`Niemand sah ${w}!`,again:'Danke euch! Noch eine Runde?',nextIn:'Nächstes Spiel in',playNow:'Jetzt spielen',myWords:'Meine Wörter',toHome:'Zurück',rank:k=>`${k}. Platz`,yourScore:'Deine Punkte',shared:'doppelt',excl:'nur deins: ×2',noWords:'Keine Wörter.',newHost:'Du bist jetzt der Gastgeber.',grid:'Brett',time:'Zeit',lang:'Sprache',
+  ach:[['Alle im Rhythmus','Alle fanden mindestens 10 Wörter.'],['Riesenwort','Jemand fand ein Wort mit 7+ Buchstaben.'],['Gleiche Gedanken','Ihr fandet 5 oder mehr gleiche Wörter.'],['Jeder für sich','Niemand hat ein Wort wiederholt!']]},
+it:{scan:'Gioca con gli amici: inquadra con il telefono',orCode:'oppure vai su embaralho.com.br e scrivi',haveCode:'Hai un codice?',join:'Entra',meToo:'Gioco anch’io',waitStart:n=>`In attesa che ${n} inizi…`,waitPlayers:'In attesa di giocatori…',host:'Host',youHost:'Sei tu l’host!',start:'Inizia',leave:'Esci',leaveQ:'Uscire dalla stanza? La partita continua per gli altri.',invite:'Invita',room:'Stanza',copyLink:'Copia link',copied:'Link copiato!',close:'Chiudi',full:'Stanza piena (max 8 giocatori).',notFound:'Stanza non trovata. Controlla il codice.',netErr:'Nessuna connessione al server. Controlla internet.',inProgress:'Partita in corso. Entrerai nella prossima.',calc:'Raccolgo le parole di tutti…',tvName:'Schermo',lookTV:'Guarda lo schermo grande!',lookPhone:'Prendi il telefono: la griglia è lì!',r3:'Parole di 3 lettere',r3v:'1 punto',rAdd:'Ogni lettera in più',rAddv:'+1 punto',rEx:'Parola trovata solo da te',rExv:'vale doppio',total:'Parole totali',counted:'Contate',exclusive:'Parole esclusive',words:n=>n===1?'parola':'parole',pts:n=>n===1?'punto':'punti',win:['Che vittoria, {n}!','Grande, {n}!','Mago delle parole, {n}!'],tie:'Pareggio!',record:'Nuovo record!',longest:'Parola più lunga della griglia',longFound:(w,n)=>`${w}: l’ha trovata ${n}!`,longMissed:w=>`Nessuno ha visto ${w}!`,again:'Grazie a tutti! Un’altra?',nextIn:'Nuova partita tra',playNow:'Gioca ora',myWords:'Le mie parole',toHome:'Indietro',rank:k=>`${k}º`,yourScore:'Il tuo punteggio',shared:'ripetuta',excl:'solo tua: ×2',noWords:'Nessuna parola.',newHost:'Ora sei tu l’host.',grid:'Griglia',time:'Tempo',lang:'Lingua',
+  ach:[['Tutti a ritmo','Tutti hanno trovato almeno 10 parole.'],['Parola gigante','Qualcuno ha trovato una parola di 7+ lettere.'],['Menti simili','Avete trovato 5 o più parole uguali.'],['Ognuno per sé','Nessuno ha ripetuto una parola!']]}};
 const ML=()=>MPT[S.lang]||MPT.en;
-const mpS={code:null,uid:null,room:null,seen:0,unsubs:[]};
+const mpS={code:null,uid:null,room:null,role:null,seen:0,unsubs:[]};
 let Net=null;
 function localNet(){
   const ch=new BroadcastChannel('emb-mock');let tree={};const ls=[],disc=[];
@@ -962,127 +1052,208 @@ function localNet(){
     on(p,cb){const l={p,cb};ls.push(l);setTimeout(()=>cb(clone(getP(p))),0);return()=>{const i=ls.indexOf(l);if(i>=0)ls.splice(i,1)}},
     async get(p){return clone(getP(p))},async set(p,v){apply('set',p,fix(v))},async update(p,v){apply('update',p,fix(v))},async remove(p){apply('set',p,null)},
     async onDisc(p,v){disc.push([p,v])},onConnected(cb){setTimeout(()=>cb(true),0);return()=>{}},
-    async create(p,v){if(getP(p)!=null)return false;apply('set',p,fix(v));return true},
-    qr:t=>`<svg viewBox="0 0 21 21"><rect width="21" height="21" fill="#fff"/><rect x="2" y="2" width="5" height="5"/><rect x="14" y="2" width="5" height="5"/><rect x="2" y="14" width="5" height="5"/></svg>`,
+    async create(p,v){const c=getP(p);if(c!=null&&!(c.created<Date.now()-864e5))return false;apply('set',p,fix(v));return true},
+    qr:t=>`<svg viewBox="0 0 21 21"><rect width="21" height="21" fill="#fff"/><rect x="2" y="2" width="5" height="5"/><rect x="14" y="2" width="5" height="5"/><rect x="2" y="14" width="5" height="5"/><rect x="9" y="9" width="3" height="3"/></svg>`,
     _disc(){disc.splice(0).forEach(([p,v])=>apply('set',p,v))}};
   addEventListener('pagehide',()=>N._disc());return N}
 async function getNet(){if(Net)return Net;if(MOCK)Net=localNet();else{if(!window.EmbNet)await new Promise((res,rej)=>{const s=document.createElement('script');s.src='net.js';s.onload=res;s.onerror=rej;document.head.appendChild(s)});Net=window.EmbNet}return Net}
-const roomURL=c=>location.origin+location.pathname+'?sala='+c;
+const roomURL=c=>location.origin+location.pathname+'?sala='+c+(MOCK?'&mock=1':'');
 const mpOn=r=>Object.entries((r&&r.players)||{}).filter(([,p])=>p&&p.on).sort((a,b)=>(a[1].j||0)-(b[1].j||0));
-const mpPlayers=r=>mpOn(r).filter(([id])=>!(r.cfg&&r.cfg.tv&&id===r.host));
-function rmMsg(t){$('#roomMsg').textContent=t||''}
-async function mpConnect(){rmMsg(ML().connecting);const n=await getNet();mpS.uid=await n.init(FBCFG);rmMsg('');return n}
-async function mpCreate(){$('#bCreate').disabled=true;try{const n=await mpConnect();let code=null;
-    for(let t=0;t<8&&!code;t++){const c=Array.from({length:4},()=>CODEABC[(Math.random()*CODEABC.length)|0]).join('');
-      if(await n.create('rooms/'+c,{host:mpS.uid,created:n.TS(),state:'lobby',cfg:{lang:S.lang,N:4,time:120,tv:false}}))code=c}
-    if(!code)throw new Error('code');await mpEnter(code)}catch(e){console.error(e);rmMsg(ML().netErr)}finally{$('#bCreate').disabled=false}}
-async function mpJoin(code){code=String(code||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(code.length!==4){rmMsg(ML().notFound);return}
-  $('#bJoin').disabled=true;try{const n=await mpConnect();const room=await n.get('rooms/'+code);if(!room||!room.host){rmMsg(ML().notFound);return}
-    const ps=mpPlayers(room);if(ps.length>=MAXP&&!ps.some(([id])=>id===mpS.uid)){rmMsg(ML().full);return}
-    await mpEnter(code)}catch(e){console.error(e);rmMsg(ML().netErr)}finally{$('#bJoin').disabled=false}}
-async function mpEnter(code){const n=Net;mpS.code=code;mpS.base='rooms/'+code;mpS.seen=0;mpS.wait=null;const p=prof();const me=mpS.base+'/players/'+mpS.uid;
-  const old=await n.get(me);await n.set(me,{name:p.name,av:p.av,on:true,j:old&&old.j?old.j:n.TS(),c:0,rc:0});await n.onDisc(me+'/on',false);
+const mpPlayers=r=>mpOn(r).filter(([,p])=>p.role!=='s');
+const mpScreens=r=>mpOn(r).filter(([,p])=>p.role==='s');
+const hostName=r=>{const h=r&&r.players&&r.players[r.host];return h&&h.on&&h.role!=='s'?h.name:null};
+async function mpConnect(){const n=await getNet();if(!mpS.uid)mpS.uid=await n.init(FBCFG);return n}
+async function mpCreate(role){const n=await mpConnect();let code=null;
+  for(let t=0;t<8&&!code;t++){const c=Array.from({length:CODELEN},()=>CODEABC[(Math.random()*CODEABC.length)|0]).join('');
+    const room={owner:mpS.uid,created:n.TS(),cfg:{lang:S.lang,N:4,time:120}};if(role==='p')room.host=mpS.uid;
+    if(await n.create('rooms/'+c,room))code=c}
+  if(!code)throw new Error('code');try{sessionStorage.setItem('emb_room',code)}catch(e){}await mpEnter(code,role);return code}
+async function mpJoin(code,role='p'){code=String(code||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(code.length!==CODELEN){toast(ML().notFound);return false}
+  try{const n=await mpConnect();const room=await n.get('rooms/'+code);if(!room||!room.owner){toast(ML().notFound,3000);return false}
+    const ps=mpPlayers(room);if(role==='p'&&ps.length>=MAXP&&!ps.some(([id])=>id===mpS.uid)){toast(ML().full,3000);return false}
+    if(mpS.code&&mpS.code!==code)await mpLeave(true);await mpEnter(code,role);return true}catch(e){console.error(e);toast(ML().netErr,3200);return false}}
+async function mpEnter(code,role){const n=Net;mpS.code=code;mpS.base='rooms/'+code;mpS.role=role;mpS.seen=0;mpS.wait=null;const p=prof();const me=mpS.base+'/players/'+mpS.uid;
+  const old=await n.get(me);await n.set(me,{name:p.name,av:p.av,on:true,j:old&&old.j?old.j:n.TS(),c:0,rc:0,role});await n.onDisc(me+'/on',false);
   const rd=await n.get(mpS.base+'/round');if(rd&&n.now()>rd.startAt+rd.time*1000)mpS.seen=rd.n;
   mpS.unsubs.forEach(f=>{try{f()}catch(e){}});
   mpS.unsubs=[n.onConnected(c=>{if(c&&mpS.code===code){n.set(me+'/on',true);n.onDisc(me+'/on',false)}}),n.on(mpS.base,r=>mpRoom(r))];
-  try{history.replaceState(null,'','?sala='+code+(MOCK?'&mock=1':''))}catch(e){}
-  $('#lbQR').innerHTML=n.qr(roomURL(code));renderLobby(true);navStack=[];view('vLobby')}
+  if(role==='p'){try{history.replaceState(null,'','?sala='+code+(MOCK?'&mock=1':'')+(QS.get('dev')?'&dev='+QS.get('dev'):''))}catch(e){}}
+  mpUI()}
+async function mpSetRole(role){if(!mpS.code)return;mpS.role=role;await Net.update(mpS.base+'/players/'+mpS.uid,{role});mpUI()}
 function mpRoom(r){if(!mpS.code)return;mpS.room=r;
-  if(!r||!r.host){mpLeave(ML().closed);return}
-  const wasHost=mpS.isHost;mpS.isHost=r.host===mpS.uid;if(mpS.isHost&&wasHost===false)toast(ML().newHost,2600);
+  if(!r||!r.owner){mpLeave(true);goHome();return}
+  const wasHost=mpS.isHost;mpS.isHost=r.host===mpS.uid&&mpS.role==='p';if(mpS.isHost&&wasHost===false&&mpPlayers(r).length>1)toast(ML().newHost,2600);if(mpS.isHost!==wasHost)mpSchedule();
   const hp=r.players&&r.players[r.host];
-  if((!hp||!hp.on)&&!mpS.claiming){const on=mpOn(r);if(on.length&&on[0][0]===mpS.uid){mpS.claiming=1;Net.update(mpS.base,{host:mpS.uid,'cfg/tv':false}).catch(e=>console.error(e)).finally(()=>mpS.claiming=0)}}
+  if(mpS.role==='p'&&(!hp||!hp.on||hp.role==='s')&&!mpS.claiming){const ps=mpPlayers(r);if(ps.length&&ps[0][0]===mpS.uid){mpS.claiming=1;Net.set(mpS.base+'/host',mpS.uid).catch(e=>console.error(e)).finally(()=>mpS.claiming=0)}}
   const lang=(r.cfg&&r.cfg.lang)||'pt';if(!dicts[lang])loadDict(lang).then(()=>mpS.room&&mpRoom(mpS.room));
   const rd=r.round;
   if(rd&&rd.n>mpS.seen){const now=Net.now(),endAt=rd.startAt+rd.time*1000;
+    const mine=mpS.role==='p'?!!(rd.ids&&rd.ids[mpS.uid]):mpS.role==='s';
     if(now>=endAt-1500)mpS.seen=rd.n;
-    else if(rd.ids&&rd.ids[mpS.uid]){if(dicts[rd.lang]){mpS.seen=rd.n;mpPlay(rd,false)}else loadDict(rd.lang).then(()=>mpS.room&&mpRoom(mpS.room))}
-    else if(rd.tv===mpS.uid){if(dicts[rd.lang]){mpS.seen=rd.n;mpPlay(rd,true)}else loadDict(rd.lang).then(()=>mpS.room&&mpRoom(mpS.room))}}
+    else if(mine){if(dicts[rd.lang]){mpS.seen=rd.n;mpPlay(rd,mpS.role==='s')}else loadDict(rd.lang).then(()=>mpS.room&&mpRoom(mpS.room))}}
+  if(rd&&mpS.next!==rd.next){mpS.next=rd.next;mpSchedule()}
   if(mpS.wait)mpCheckWords();
-  if(!$('#vLobby').hidden)renderLobby();
-  if(G&&G.mode==='party')renderMpBar();
-  if(!$('#vMpRes').hidden)mpResActs()}
-function mpPlay(rd,spect){$('#vMpRes').hidden=true;$('#endcard').hidden=true;clearTimeout(mpS.waitTo);mpS.wait=null;startGame('party',null,{rd,spect})}
-function renderLobby(first){const r=mpS.room,M=ML();$('#lbT').textContent=M.room+' '+mpS.code;$('#lbCode').textContent=mpS.code;$('#lbInv').textContent=M.invite;$('#bCopyLink').textContent=M.copyLink;
-  $('#lbTvL').textContent=M.tv;$('#lbTvN').textContent=M.tvNote;$('#bStartR').textContent=M.start;$('#bLeave').textContent=M.leave;
-  if(!r)return;const host=r.host===mpS.uid,c=r.cfg||{},ps=mpPlayers(r);
-  $('#lbPl').textContent=M.players(ps.length);
-  const tvHost=c.tv?r.players&&r.players[r.host]:null;
-  const plH=ps.map(([id,p])=>`<div class="plc${id===mpS.uid?' me':''}"><span class="av">${avatar(p.av,id===mpS.uid?'happy':'idle')}</span><b>${esc(p.name)}</b><small>${id===r.host?'👑 '+esc(M.host):id===mpS.uid?esc(M.you):''}</small></div>`).join('')+
-    (tvHost?`<div class="plc tvc"><span class="av tvi">📺</span><b>${esc(M.tvName)}</b><small>👑 ${esc(M.host)}</small></div>`:'')+
-    Array.from({length:Math.max(0,MAXP-ps.length)},()=>`<div class="plc empty"><span class="av"></span></div>`).join('');if(plH!==mpS.plH){mpS.plH=plH;$('#lbPlayers').innerHTML=plH}
-  const cfH=LANGS.map(l=>`<button data-v="${l}" aria-pressed="${c.lang===l}" ${host?'':'disabled'}>${NAME[l]}</button>`).join('');if(cfH!==mpS.cfH){mpS.cfH=cfH;$('#lbLang').innerHTML=cfH}
-  const szH=[4,5,6].map(n=>`<button data-v="${n}" aria-pressed="${c.N===n}" ${host?'':'disabled'}>${n}×${n}</button>`).join('');if(szH!==mpS.szH){mpS.szH=szH;$('#lbSize').innerHTML=szH}
-  const dur=$('#lbDur');if(document.activeElement!==dur)dur.value=c.time||120;dur.disabled=!host;$('#lbDurT').textContent=fmt(+dur.value);
-  $('#lbTv').checked=!!c.tv;$('#lbTv').disabled=!host;
-  const rd=r.round,playing=rd&&Net.now()<rd.startAt+rd.time*1000;
-  $('#bStartR').hidden=!host;$('#bStartR').disabled=!!playing||!ps.length;
-  $('#lbMsg').textContent=playing&&!(rd.ids&&rd.ids[mpS.uid])?M.inProgress:host?(ps.length?M.rule:M.needPlayers):M.waitHost}
+  mpUI()}
+function mpPlay(rd,spect){$('#vMpRes').hidden=true;$('#endcard').hidden=true;clearTimeout(mpS.waitTo);mpS.wait=null;mpS.res=null;startGame('party',null,{rd,spect})}
+/* ---------- telas fora da partida ---------- */
+function mpUI(){const r=mpS.room,M=ML();
+  const inGame=G&&G.mode==='party'&&(G.running||G.g0);if(inGame){renderMpBar();return}
+  if(!$('#vMpRes').hidden){mpResUpdate();return}
+  // notebook como tela
+  const remote=r?mpPlayers(r).filter(([id])=>id!==mpS.uid):[];
+  if(mpS.role==='s'){const home=!$('#vHome').hidden||!$('#vScreen').hidden;if(home){if(remote.length){if($('#vScreen').hidden)view('vScreen',false);renderScreen()}else{if(!$('#vScreen').hidden)view('vHome',false);renderQrPanel()}}return}
+  if(mpS.role==='p'){if($('#vLobby').hidden&&!(G&&G.running))view('vLobby',false);renderLobby()}}
+function renderQrPanel(){const M=ML(),el=$('#qrPanel');if(!mpS.code||mpS.role!=='s'||!isDesk()){el.hidden=true;return}el.hidden=false;$('#bQpMe').textContent=M.meToo;
+  $('#qpT').textContent=M.scan;$('#qpQR').innerHTML=mpS.qrSvg||(mpS.qrSvg=Net.qr(roomURL(mpS.code)));$('#qpOr').textContent=M.orCode;$('#qpCode').textContent=mpS.code;$('#qpHave').textContent=M.haveCode;$('#bQpJoin').textContent=M.join}
+const plBadge=(id,p,r,big)=>`<div class="pb${id===mpS.uid?' me':''}"><span class="av">${avatar(p.av,'happy')}</span><div><b>${esc(p.name)}</b>${r&&r.host===id?`<small>${esc(ML().host)}</small>`:''}</div></div>`;
+function renderScreen(){const r=mpS.room,M=ML();if(!r)return;const ps=mpPlayers(r);
+  $('#scLogo').innerHTML='EMBARALHO'.split('').map((c,i)=>`<span style="--i:${i}">${c}</span>`).join('');
+  const h=ps.map(([id,p])=>plBadge(id,p,r)).join('');if(h!==mpS.scH){mpS.scH=h;$('#scPlayers').innerHTML=h}
+  $('#scQR').innerHTML=mpS.qrSvg||(mpS.qrSvg=Net.qr(roomURL(mpS.code)));$('#scScan').textContent=M.scan;$('#scCode').textContent=mpS.code;$('#scCount').textContent=`${ps.length}/${MAXP}`;
+  const hn=hostName(r);$('#scMsg').textContent=hn?M.waitStart(hn):M.waitPlayers;$('#bMeToo').textContent=M.meToo;
+  const c=r.cfg||{};$('#scCfg').textContent=`${NAME[c.lang]||''} · ${c.N}×${c.N} · ${fmt(c.time||120)}`}
+function renderLobby(){const r=mpS.room,M=ML();if(!r)return;const me=(r.players||{})[mpS.uid];if(!me)return;const ps=mpPlayers(r),host=r.host===mpS.uid,c=r.cfg||{};
+  $('#lbCode').textContent=M.room+' '+mpS.code;$('#bLbInv').title=M.invite;
+  const h=ps.map(([id,p])=>`<span class="lp${id===mpS.uid?' me':''}" title="${esc(p.name)}">${avatar(p.av,'idle')}${r.host===id?'<i>👑</i>':''}</span>`).join('')+`<small>${ps.length}/${MAXP}</small>`;if(h!==mpS.lpH){mpS.lpH=h;$('#lbPlayers').innerHTML=h}
+  $('#lbAv').innerHTML=avatar(me.av,host?'happy':'idle');$('#lbName').textContent=me.name;$('#lbHostTag').hidden=!host;$('#lbHostTag').textContent=M.host.toUpperCase();
+  const rd=r.round,playing=rd&&Net.now()<rd.startAt+rd.time*1000&&!(rd.ids&&rd.ids[mpS.uid]);
+  $('#lbMsg').textContent=playing?M.inProgress:host?M.youHost:(hostName(r)?M.waitStart(hostName(r)):M.waitPlayers);
+  $('#lbCfgT').textContent=`${NAME[c.lang]||''} · ${c.N}×${c.N} · ${fmt(c.time||120)}`;$('#lbCfgT').hidden=host;$('#lbCfg').hidden=!host;
+  if(host){$('#lbLangL').textContent=M.lang;$('#lbGridL').textContent=M.grid;$('#lbTimeL').textContent=M.time;
+    const sel=$('#lbLang');if(!sel.options.length)sel.innerHTML=LANGS.map(l=>`<option value="${l}">${NAME[l]}</option>`).join('');if(document.activeElement!==sel)sel.value=c.lang;
+    $$('#lbGrid button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.v===c.N)));$$('#lbTime button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.v===c.time)))}
+  $('#bLbStart').hidden=!host;$('#bLbStart').textContent=M.start;$('#bLbStart').disabled=!!playing}
 function mpCfg(k,v){if(!mpS.isHost)return;Net.set(mpS.base+'/cfg/'+k,v)}
-$('#lbLang').onclick=e=>{const b=e.target.closest('button[data-v]');if(b&&!b.disabled){mpCfg('lang',b.dataset.v);loadDict(b.dataset.v)}};
-$('#lbSize').onclick=e=>{const b=e.target.closest('button[data-v]');if(b&&!b.disabled)mpCfg('N',+b.dataset.v)};
-$('#lbDur').oninput=()=>{$('#lbDurT').textContent=fmt(+$('#lbDur').value)};$('#lbDur').onchange=()=>mpCfg('time',+$('#lbDur').value);
-$('#lbTv').onchange=()=>mpCfg('tv',$('#lbTv').checked);
-$('#bCopyLink').onclick=async()=>{const ok=await copyText(roomURL(mpS.code));toast(ok?ML().copied:roomURL(mpS.code),2600)};
-async function mpStart(){const r=mpS.room;if(!r||r.host!==mpS.uid)return;const ps=mpPlayers(r);if(!ps.length){toast(ML().needPlayers);return}
-  $('#bStartR').disabled=true;const c=r.cfg;await loadDict(c.lang);const b=makeBoard(c.lang,c.N,(Math.random()*2**32)>>>0);
-  const ids={};ps.forEach(([id,p])=>ids[id]={name:p.name,av:p.av});const n=((r.round&&r.round.n)||0)+1;
-  const upd={round:{n,g:b.g,lang:c.lang,N:c.N,time:c.time,startAt:Net.now()+4500,ids,tv:c.tv?mpS.uid:null},state:'playing'};
-  if(n>2)upd['words/'+(n-2)]=null;
-  try{await Net.update(mpS.base,upd)}catch(e){console.error(e);toast(ML().netErr);$('#bStartR').disabled=false}}
-$('#bStartR').onclick=mpStart;
-async function mpLeave(msg){if(!mpS.code)return;mpS.unsubs.forEach(f=>{try{f()}catch(e){}});mpS.unsubs=[];
-  const me=mpS.base+'/players/'+mpS.uid;try{await Net.set(me+'/on',false)}catch(e){}
+$('#lbLang').onchange=()=>{mpCfg('lang',$('#lbLang').value);loadDict($('#lbLang').value)};
+$('#lbGrid').onclick=e=>{const b=e.target.closest('button[data-v]');if(b)mpCfg('N',+b.dataset.v)};
+$('#lbTime').onclick=e=>{const b=e.target.closest('button[data-v]');if(b)mpCfg('time',+b.dataset.v)};
+$('#bLbStart').onclick=()=>mpStart();
+$('#bLbExit').onclick=async()=>{const r=mpS.room;if(isDesk()&&r&&r.owner===mpS.uid){await mpSetRole('s');if(r.host===mpS.uid)await Net.remove(mpS.base+'/host').catch(()=>{});view(mpPlayers(mpS.room).filter(([id])=>id!==mpS.uid).length?'vScreen':'vHome',false);mpUI();return}if(confirm(ML().leaveQ)){await mpLeave();await goHome();if(isDesk())mpBoot(true)}};
+$('#bQpMe').onclick=async()=>{await mpSetRole('p');view('vLobby',false);mpUI()};
+$('#bLbInv').onclick=()=>openInvite();
+$('#bMeToo').onclick=async()=>{await mpSetRole('p');view('vLobby',false);mpUI()};
+$('#bQpJoin').onclick=async()=>{const ok=await mpJoin($('#qpIn').value,'p');if(ok)view('vLobby',false)};
+$('#qpIn').oninput=()=>{const i=$('#qpIn');i.value=i.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,CODELEN)};
+$('#qpIn').onkeydown=e=>{if(e.key==='Enter')$('#bQpJoin').click()};
+$('#bInvite').onclick=async()=>{const b=$('#bInvite');b.disabled=true;try{if(!mpS.code)await mpCreate('p');view('vLobby',false);mpUI();openInvite()}catch(e){console.error(e);toast(ML().netErr,3200)}finally{b.disabled=false}};
+function openInvite(){if(!mpS.code)return;const M=ML();$('#ivQR').innerHTML=Net.qr(roomURL(mpS.code));$('#ivCode').textContent=mpS.code;$('#ivT').textContent=M.scan;$('#ivOr').textContent=M.orCode;$('#bIvCopy').textContent=M.copyLink;$('#bIvClose').textContent=M.close;$('#vInvite').hidden=false}
+$('#bIvClose').onclick=()=>$('#vInvite').hidden=true;$('#vInvite').onclick=e=>{if(e.target.id==='vInvite')$('#vInvite').hidden=true};
+$('#bIvCopy').onclick=async()=>{const u=roomURL(mpS.code);let ok=false;try{if(navigator.share){await navigator.share({url:u,title:'Embaralho'});ok=true}}catch(e){}if(!ok){ok=await copyText(u);toast(ok?ML().copied:u,2600)}};
+async function mpStart(){const r=mpS.room;if(!r||r.host!==mpS.uid)return;const ps=mpPlayers(r);if(!ps.length)return;
+  $('#bLbStart').disabled=true;clearTimeout(mpS.autoT);const c=r.cfg;await loadDict(c.lang);const b=makeBoard(c.lang,c.N,(Math.random()*2**32)>>>0);
+  const ids={};ps.forEach(([id,p])=>ids[id]={name:p.name,av:p.av,host:id===r.host?1:0});const n=((r.round&&r.round.n)||0)+1;
+  const upd={round:{n,g:b.g,lang:c.lang,N:c.N,time:c.time,startAt:Net.now()+4500,ids,scr:mpScreens(r).length?1:0}};if(n>2)upd['words/'+(n-2)]=null;
+  try{await Net.update(mpS.base,upd)}catch(e){console.error(e);toast(ML().netErr);$('#bLbStart').disabled=false}}
+async function mpLeave(silent){if(!mpS.code)return;mpS.unsubs.forEach(f=>{try{f()}catch(e){}});mpS.unsubs=[];clearTimeout(mpS.autoT);
+  try{await Net.set(mpS.base+'/players/'+mpS.uid+'/on',false)}catch(e){}
   if(G&&G.mode==='party'){G.running=false;clearInterval(G.iv);danger(false)}clearTimeout(mpS.waitTo);
-  Object.assign(mpS,{code:null,base:null,room:null,wait:null,seen:0,isHost:undefined});
-  try{history.replaceState(null,'',location.pathname+(MOCK?'?mock=1':''))}catch(e){}
-  $('#vMpRes').hidden=true;$('#endcard').hidden=true;document.body.classList.remove('spect');$('#mpbar').hidden=true;if(msg)toast(msg,3200);goHome()}
-$('#bLeave').onclick=()=>mpLeave();
+  Object.assign(mpS,{code:null,base:null,room:null,role:null,wait:null,seen:0,isHost:undefined,scH:null,lpH:null,qrSvg:null,res:null});
+  try{history.replaceState(null,'',location.pathname+(MOCK?'?mock=1':'')+(QS.get('dev')?(MOCK?'&':'?')+'dev='+QS.get('dev'):''))}catch(e){}
+  $('#vMpRes').hidden=true;$('#endcard').hidden=true;$('#mpbar').hidden=true;$('#vInvite').hidden=true}
 function mpFound(){if(!mpS.code||!G||G.mode!=='party')return;Net.update(mpS.base+'/players/'+mpS.uid,{c:G.found.size,rc:G.rn});store.set('mp_'+mpS.code+'_'+G.rn+'_'+mpS.uid,{f:[...G.found],s:G.score});renderMpBar()}
 function renderMpBar(){const r=mpS.room,el=$('#mpbar');if(!G||G.mode!=='party'||!r||!r.round){el.hidden=true;return}el.hidden=false;const rd=r.round;
   const rows=Object.entries(rd.ids||{}).map(([id,p])=>{const pl=r.players&&r.players[id];let c=pl&&pl.rc===rd.n?pl.c||0:0;if(id===mpS.uid&&G.rn===rd.n)c=G.found.size;return{id,p,c,on:!!(pl&&pl.on)}}).sort((a,b)=>b.c-a.c);
-  el.innerHTML=rows.map(x=>`<div class="mpc${x.id===mpS.uid?' me':''}${x.on?'':' off'}"><span class="av">${avatar(x.p.av,x.c&&x.c===rows[0].c?'happy':'idle')}</span><span class="nm">${esc(x.p.name)}</span><b>${x.c}</b></div>`).join('')}
-async function mpFinish(){const rn=G.rn,W={n:rn,t0:Date.now(),g:G.g,N:G.N,lang:G.lang,sol:G.sol};
+  el.innerHTML=rows.map(x=>`<div class="mpc${x.id===mpS.uid?' me':''}${x.on?'':' off'}"><span class="av">${avatar(x.p.av,x.c&&x.c===rows[0].c?'happy':'idle')}</span><span class="nm">${esc(x.p.name)}</span><b>${x.c}</b><small>${esc(ML().words(x.c))}</small></div>`).join('')}
+/* ---------- fim da partida e apuração ---------- */
+async function mpFinish(){const rn=G.rn,W={n:rn,t0:Date.now(),g:G.g,N:G.N,lang:G.lang,sol:G.sol,spect:G.spect,key:'mpbest_'+G.lang+'_'+G.N+'_'+G.time};
   const ec=$('#endcard');ec.innerHTML=`<div>${IC.hour}<b>${esc(L.timeUp)}</b><small>${esc(ML().calc)}</small></div>`;ec.hidden=false;ec.onclick=null;beep(220,.4,'sawtooth',.05);setReact('wow');
-  mpS.wait=W;clearTimeout(mpS.waitTo);mpS.waitTo=setTimeout(()=>mpCheckWords(true),8000);setTimeout(()=>mpCheckWords(),2600);
-  if(!G.spect){try{await Net.set(mpS.base+'/words/'+rn+'/'+mpS.uid,{d:1,w:[...G.found.keys()],h:[...G.found].filter(x=>x[1].h).map(x=>x[0])})}catch(e){console.error(e)}}}
+  mpS.wait=W;clearTimeout(mpS.waitTo);mpS.waitTo=setTimeout(()=>mpCheckWords(true),9000);setTimeout(()=>mpCheckWords(),2600);
+  if(!G.spect){try{await Net.set(mpS.base+'/words/'+rn+'/'+mpS.uid,{d:1,pb:store.get(W.key,0),w:[...G.found.keys()],h:[...G.found].filter(x=>x[1].h).map(x=>x[0])})}catch(e){console.error(e)}}}
 function mpCheckWords(force){const W=mpS.wait;if(!W)return;const r=mpS.room,rd=r&&r.round;if(!rd||rd.n!==W.n)return;
   const ws=(r.words&&r.words[W.n])||{},ids=Object.keys(rd.ids||{});const done=ids.every(id=>ws[id]||!(r.players&&r.players[id]&&r.players[id].on));
-  if(!force&&(!done||Date.now()-W.t0<2500))return;clearTimeout(mpS.waitTo);mpS.wait=null;$('#endcard').hidden=true;mpShowResults(rd,ws,W)}
+  if(!force&&(!done||Date.now()-W.t0<2500))return;clearTimeout(mpS.waitTo);mpS.wait=null;$('#endcard').hidden=true;mpResults(rd,ws,W)}
 function mpScore(rd,ws){const ids=Object.keys(rd.ids||{}),cnt={};ids.forEach(id=>(((ws[id]||{}).w)||[]).forEach(w=>cnt[w]=(cnt[w]||0)+1));
-  const rows=ids.map(id=>{const p=rd.ids[id],x=ws[id]||{},w=x.w||[];let s=0;w.forEach(k=>s+=cnt[k]>1?1:pts(k.length));return{id,name:p.name,av:p.av,words:w,hinted:x.h||[],score:s,missing:!ws[id]}});
-  rows.sort((a,b)=>b.score-a.score||b.words.length-a.words.length);let rk=0;rows.forEach((x,i)=>{if(!i||x.score!==rows[i-1].score||x.words.length!==rows[i-1].words.length)rk=i+1;x.rank=rk});return{rows,cnt}}
-async function mpShowResults(rd,ws,W){const M=ML(),{rows,cnt}=mpScore(rd,ws),lang=rd.lang;await loadDict(lang);
-  hideViews();$('#vRes').hidden=true;const V=$('#vMpRes');V.hidden=false;V.scrollTop=0;document.body.classList.remove('spect');
-  let best=null;rows.forEach(x=>x.words.forEach(w=>{if(!best||w.length>best.w.length)best={w,who:[x.name]};else if(w===best.w)best.who.push(x.name)}));
-  let pl=null;for(const[w,v]of W.sol){if(v.lvl<2)continue;if(!pl||w.length>pl.length)pl=w}
-  const anyFound=new Set(Object.keys(cnt));
-  const card=(x,i)=>`<div class="pc${x.id===mpS.uid?' me':''}${x.rank===1?' gold':''}" style="animation-delay:${i*140}ms"><span class="rk">${x.rank}º</span><span class="av">${avatar(x.av,x.rank===1?'love':'happy')}</span><b class="nm">${esc(x.name)}</b>
-    <div class="big"><div><b data-to="${x.words.length}">0</b><small>${esc(M.words(x.words.length))}</small></div><div><b data-to="${x.score}">0</b><small>${esc(M.points(x.score))}</small></div></div></div>`;
-  const chips=x=>x.words.length?x.words.slice().sort((a,b)=>b.length-a.length||a.localeCompare(b)).map(w=>cnt[w]>1?`<span class="wc-chip sh" title="${esc(M.shared)}">${esc(show(lang,w))}<b>+1</b></span>`:`<span class="wc-chip L${Math.min(8,w.length)}">${esc(show(lang,w))}<b>+${pts(w.length)}</b></span>`).join(''):`<span class="note">${esc(M.noWords)}</span>`;
-  $('#mpR').innerHTML=`<div class="title-pill">${esc(M.result)}</div>
-    <div class="podium">${rows.map(card).join('')}</div>
-    <div class="mpinfo"><div><small>${esc(M.roomLong)}</small>${best?`<span class="wc-chip L${Math.min(8,best.w.length)}">${esc(show(lang,best.w))}</span><em>${esc(best.who.join(', '))}</em>`:'—'}</div>
-      <div><small>${esc(M.boardLong)}</small>${pl?`<span class="wc-chip L${Math.min(8,pl.length)}">${esc(show(lang,pl))}</span><em>${anyFound.has(pl)?'':esc(M.nobody)}</em>`:'—'}</div><div class="rule">${esc(M.rule)}</div></div>
-    <div class="pws">${rows.map(x=>`<div class="pw"><h4><span class="av">${avatar(x.av,'idle')}</span>${esc(x.name)}</h4><div class="chips">${chips(x)}</div></div>`).join('')}</div>
-    <div class="acts" id="mpActs"></div>`;
-  const t0=performance.now(),els=$$('#mpR .big b[data-to]');const st=t=>{const k=Math.min(1,(t-t0)/1600);els.forEach(b=>b.textContent=Math.round(+b.dataset.to*k));if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st);
-  beep(660,.2,'triangle');setTimeout(()=>chime(6),900);mpResActs()}
-function mpResActs(){const el=$('#mpActs');if(!el)return;const M=ML(),host=mpS.isHost;
-  el.innerHTML=(host?`<button class="b-pri" id="bMpAgain">${esc(M.again)}</button>`:'')+`<button id="bMpLobby">${esc(M.toLobby)}</button><button class="b-ghost" id="bMpLeave">${esc(M.leave)}</button>`;
-  if(host)$('#bMpAgain').onclick=()=>mpStart();$('#bMpLobby').onclick=()=>{$('#vMpRes').hidden=true;document.body.className='m-classic';navStack=[];view('vLobby');renderLobby()};$('#bMpLeave').onclick=()=>mpLeave()}
-$('#bFriends').onclick=()=>{rmMsg('');renderRoomTxt();view('vRoom')};
-function renderRoomTxt(){const M=ML();$('#rmT').textContent=M.friends;$('#bCreate').textContent=M.create;$('#rmOr').textContent=M.or;$('#rmCodeL').textContent=M.code;$('#bJoin').textContent=M.join;$('#frT').textContent=M.friends;$('#frS').textContent=M.friendsSub}
-$('#bCreate').onclick=()=>mpCreate();$('#bJoin').onclick=()=>mpJoin($('#codeIn').value);$('#codeIn').onkeydown=e=>{if(e.key==='Enter')mpJoin($('#codeIn').value)};
-$('#codeIn').oninput=()=>{const i=$('#codeIn');i.value=i.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4)};
+  const rows=ids.map(id=>{const p=rd.ids[id],x=ws[id]||{},w=x.w||[];let s=0;w.forEach(k=>s+=cnt[k]>1?pts(k.length):pts(k.length)*2);return{id,name:p.name,av:p.av,host:p.host,words:w,score:s,pb:x.pb||0,missing:!ws[id]}});
+  const order=rows.slice().sort((a,b)=>b.score-a.score||b.words.length-a.words.length);let rk=0;order.forEach((x,i)=>{if(!i||x.score!==order[i-1].score)rk=i+1;x.rank=rk});
+  rows.forEach(x=>x.record=x.score>0&&x.score>x.pb);return{rows,order,cnt}}
+const seqLen=n=>Math.max(280,Math.min(1000,22000/Math.max(1,n)));
+function seqMs(nShared,nEx,hasAch){const n=nShared+nEx;return 4200+n*seqLen(n)+(nEx?1800:0)+(nShared?0:0)+5200+2600+(hasAch?3200:0)+6000}
+function groupAch(rows,cnt){const M=ML(),ws=Object.keys(cnt);if(rows.length<2)return null;
+  if(rows.every(x=>x.words.length>=10))return M.ach[0];if(ws.some(w=>w.length>=7))return M.ach[1];
+  const sh=ws.filter(w=>cnt[w]>1).length;if(sh>=5)return M.ach[2];if(ws.length>=4&&sh===0)return M.ach[3];return null}
+async function mpResults(rd,ws,W){const sc=mpScore(rd,ws),{rows,cnt}=sc,lang=rd.lang;await loadDict(lang);
+  const words=Object.keys(cnt),shared=words.filter(w=>cnt[w]>1).sort((a,b)=>a.length-b.length||a.localeCompare(b)),excl=words.filter(w=>cnt[w]===1).sort((a,b)=>a.length-b.length||a.localeCompare(b));
+  const ach=groupAch(rows,cnt);const me=rows.find(x=>x.id===mpS.uid);if(me&&me.record&&!W.spect)store.set(W.key,me.score);
+  const hasScreen=!!rd.scr;const full=W.spect||!hasScreen;
+  mpS.res={rd,ws,W,sc,shared,excl,ach,full};
+  if(mpS.isHost){const nxt=Net.now()+(hasScreen?seqMs(shared.length,excl.length,!!ach):(full?seqMs(shared.length,excl.length,!!ach):9000))+15000;Net.set(mpS.base+'/round/next',nxt)}
+  hideViews();$('#vRes').hidden=true;document.body.classList.remove('spect');const V=$('#vMpRes');V.hidden=false;
+  if(full)await seqResults();else phoneResults()}
+function mpSchedule(){clearTimeout(mpS.autoT);const nx=mpS.next;if(!nx||!mpS.isHost)return;const w=nx-Net.now();if(w<=0)return;mpS.autoT=setTimeout(()=>{if(mpS.isHost&&mpS.room&&mpS.room.round&&mpS.room.round.next===nx)mpStart()},w)}
+function mpResUpdate(){mpActsRender();const el=$('#mpNext');if(!el)return;const rd=mpS.room&&mpS.room.round;const nx=rd&&rd.next;if(!nx){el.hidden=true;return}el.hidden=false;
+  const t=Math.max(0,Math.ceil((nx-Net.now())/1000));el.querySelector('b').textContent=t;el.querySelector('small').textContent=ML().nextIn;
+  }
+function mpActsRender(){const a=$('#mpActs');if(!a)return;const h=mpActsHTML();if(a.dataset.h!==h){a.dataset.h=h;a.innerHTML=h;mpActsBind()}}
+setInterval(()=>{if(!$('#vMpRes').hidden)mpResUpdate()},500);
+function mpActsHTML(){const M=ML();return (mpS.isHost?`<button class="b-pri" id="bMpNow">${esc(M.playNow)}</button>`:'')+(mpS.role==='p'?`<button id="bMpWords">${esc(M.myWords)}</button>`:'')+`<button class="b-ghost" id="bMpBack">${esc(M.toHome)}</button>`}
+function mpActsBind(){const M=ML();if($('#bMpNow'))$('#bMpNow').onclick=()=>mpStart();if($('#bMpWords'))$('#bMpWords').onclick=()=>openMyWords();
+  $('#bMpBack').onclick=async()=>{$('#vMpRes').hidden=true;if(mpS.role==='s'){document.body.className='m-classic';view(mpPlayers(mpS.room).length?'vScreen':'vHome',false);mpUI()}else{document.body.className='m-classic';view('vLobby',false);mpUI()}}}
+function openMyWords(){const R0=mpS.res;if(!R0)return;const M=ML(),x=R0.sc.rows.find(r=>r.id===mpS.uid);const el=$('#mpWords');
+  el.innerHTML=`<div class="card"><div class="topbar"><span class="t">${esc(M.myWords)}</span></div><div class="chips">${x&&x.words.length?x.words.slice().sort((a,b)=>b.length-a.length||a.localeCompare(b)).map(w=>{const sh=R0.sc.cnt[w]>1;return `<span class="wc-chip ${sh?'sh':'L'+Math.min(8,w.length)}">${esc(show(R0.rd.lang,w))}<b>+${sh?pts(w.length):pts(w.length)*2}</b></span>`}).join(''):esc(M.noWords)}</div><small class="note">${esc(M.shared)} · ${esc(M.excl)}</small><button class="b-pri" id="bMwClose">${esc(M.close)}</button></div>`;
+  el.hidden=false;$('#bMwClose').onclick=()=>el.hidden=true}
+function phoneResults(){const R0=mpS.res,M=ML(),x=R0.sc.rows.find(r=>r.id===mpS.uid)||{score:0,words:[],rank:'-'};
+  $('#mpR').className='mpr phone';$('#mpR').innerHTML=`<div class="look"><div class="ic">📺</div><b>${esc(M.lookTV)}</b></div>
+    <div class="myres"><span class="av">${avatar(prof().av,x.rank===1?'love':'happy')}</span><b class="rk">${esc(M.rank(x.rank))}</b><div class="big"><div><b>${x.words.length}</b><small>${esc(M.words(x.words.length))}</small></div><div><b>${x.score}</b><small>${esc(M.pts(x.score))}</small></div></div>${x.record?`<span class="recb">${esc(M.record)}</span>`:''}</div>
+    <div class="mpnext" id="mpNext" hidden><small></small><b></b></div><div class="acts" id="mpActs"></div>`;mpResUpdate()}
+/* sequência completa (tela grande, ou celulares sem tela) */
+async function seqResults(){const R0=mpS.res,M=ML(),{rd,W,sc,shared,excl,ach}=R0,rows=sc.rows,lang=rd.lang,tok=(mpS.tok=(mpS.tok||0)+1);
+  const alive=()=>tok===mpS.tok&&!$('#vMpRes').hidden;let skip=false;const wait=ms=>new Promise(r=>{if(skip)return r();const t=setTimeout(r,ms);mpS.skipR=()=>{clearTimeout(t);r()}});
+  const el=$('#mpR');el.className='mpr seq'+(isDesk()?'':' small');const maxS=Math.max(1,...rows.map(x=>x.score));
+  el.innerHTML=`<div class="legend" id="sqLeg"><div class="rc" style="--d:0"><span>★</span>${esc(M.r3)}<b>${esc(M.r3v)}</b></div><div class="rc" style="--d:1"><span>★</span>${esc(M.rAdd)}<b>${esc(M.rAddv)}</b></div><div class="rc ex" style="--d:2"><span>★</span>${esc(M.rEx)}<b>${esc(M.rExv)} ×2</b></div></div>
+    ${mpS.role==='s'?`<div class="sqqr"><div class="q">${mpS.qrSvg||(mpS.qrSvg=Net.qr(roomURL(mpS.code)))}</div><small>${mpPlayers(mpS.room).length}/${MAXP}</small></div>`:''}
+    <div class="sqtop" id="sqTop"><div class="minib" id="sqBoard"></div><div class="sqbar"><small>${esc(M.total)}</small><b id="sqTot">${shared.length+excl.length}</b><div class="tube"><i id="sqFill"></i></div><small>${esc(M.counted)}</small><b id="sqCnt">0</b></div></div>
+    <div class="sqword" id="sqWord"></div><div class="banner" id="sqBan" hidden></div>
+    <div class="pils" id="sqPils">${rows.map(x=>`<div class="pil" data-id="${x.id}"><div class="pop" hidden></div><div class="top"><span class="av">${avatar(x.av,'idle')}</span><b class="sc">0</b></div><div class="body"><small class="hostt">${x.host?esc(M.host.toUpperCase()):''}</small><b class="nm">${esc(x.name)}</b><small>${x.words.length} ${esc(M.words(x.words.length))}</small><b class="rkp"></b></div></div>`).join('')}</div>
+    <div class="acts" id="mpActs" hidden></div>`;
+  el.onclick=e=>{if(e.target.closest('button'))return;skip=true;mpS.skipR&&mpS.skipR()};
+  const pil=id=>el.querySelector(`.pil[data-id="${id}"]`),score={};rows.forEach(x=>score[x.id]=0);
+  const setH=()=>rows.forEach(x=>{const p=pil(x.id);p.style.setProperty('--h',(0.18+0.82*score[x.id]/maxS).toFixed(3));p.querySelector('.sc').textContent=score[x.id]});setH();
+  const board=$('#sqBoard');board.style.gridTemplateColumns=`repeat(${W.N},minmax(0,1fr))`;const drawB=(p=[])=>board.innerHTML=W.g.map((t,i)=>`<div class="${!t?'off':p.includes(i)?'on':''}">${esc(tileTxt(t))}</div>`).join('');drawB();
+  beep(520,.2,'triangle');await wait(3400);if(!alive())return;el.classList.add('legmin');await wait(700);
+  const total=shared.length+excl.length,dur=seqLen(total);let k=0;
+  const tally=async(w,isEx)=>{const who=rows.filter(x=>x.words.includes(w));const p=(W.sol.get(w)||{}).path||findPath(W.g,W.N,w)||[];const v=pts(w.length)*(isEx?2:1);
+    const wz=$('#sqWord');const disp=show(lang,w);if(!skip){for(let i=1;i<=p.length;i++){drawB(p.slice(0,i));wz.innerHTML=`<span class="wp">${esc(p.slice(0,i).map(j=>tileTxt(W.g[j])).join('').toUpperCase())}</span>`;beep(420+i*50,.04,'triangle',.03);await wait(dur*0.35/p.length)}}
+    drawB(p);wz.innerHTML=`<span class="wp">${esc(disp)}</span><span class="wv">+${pts(w.length)}</span>`;
+    who.forEach(x=>{score[x.id]+=v;const pp=pil(x.id),po=pp.querySelector('.pop');po.hidden=false;po.textContent='+'+v;po.className='pop'+(isEx?' x2':'');void po.offsetWidth;po.classList.add('go');pp.querySelector('.top .av').innerHTML=avatar(x.av,isEx?'love':'happy')});
+    k++;$('#sqCnt').textContent=k;$('#sqFill').style.height=(k/total*100)+'%';setH();if(!skip)chime(Math.min(7,w.length));await wait(dur*0.65)};
+  for(const w of shared){if(!alive())return;await tally(w,false)}
+  if(excl.length){if(!alive())return;const bn=$('#sqBan');bn.hidden=false;bn.className='banner tilt';bn.textContent=M.exclusive;el.classList.add('exph');beep(660,.25,'triangle');await wait(1800);bn.hidden=true;
+    for(const w of excl){if(!alive())return;await tally(w,true)}}
+  rows.forEach(x=>score[x.id]=x.score);setH();$('#sqCnt').textContent=total;$('#sqFill').style.height='100%';
+  if(!alive())return;await wait(600);
+  /* vencedor */
+  el.classList.add('done');$('#sqWord').innerHTML='';const top=sc.order.filter(x=>x.rank===1);
+  rows.forEach(x=>{const p=pil(x.id);p.querySelector('.rkp').textContent=x.rank+'º';p.querySelector('.top .av').innerHTML=avatar(x.av,x.rank===1?'love':'worry');if(x.rank===1)p.classList.add('win')});
+  const bn=$('#sqBan');bn.hidden=false;bn.className='banner win';bn.innerHTML=top.length>1?esc(M.tie):esc(M.win[hash(rd.g.join(''))%M.win.length].replace('{n}',top[0].name.toUpperCase()));
+  confetti(el);beep(880,.3,'triangle');setTimeout(()=>chime(7),300);await wait(4800);if(!alive())return;bn.hidden=true;
+  /* recordes */
+  const recs=rows.filter(x=>x.record);if(recs.length){recs.forEach(x=>{const p=pil(x.id);const b=document.createElement('div');b.className='recb';b.innerHTML=`<small>${esc(M.record)}</small><b>${x.score}</b>`;p.appendChild(b)});beep(988,.3,'triangle');await wait(2600);if(!alive())return}
+  /* conquista do grupo */
+  if(ach){const a=document.createElement('div');a.className='achban';a.innerHTML=`<span>🏅</span><div><b>${esc(ach[0])}</b><small>${esc(ach[1])}</small></div>`;el.appendChild(a);beep(784,.25,'triangle');await wait(3200);if(!alive())return;a.remove()}
+  /* maior palavra */
+  let lw=null;for(const[w,v]of W.sol){if(v.lvl<2&&!sc.cnt[w])continue;if(!lw||w.length>lw.length||(w.length===lw.length&&sc.cnt[w]&&!sc.cnt[lw]))lw=w}
+  if(lw){$('#sqTop').classList.add('corner');const p=(W.sol.get(lw)||{}).path||[];drawB([]);const who=rows.filter(x=>x.words.includes(lw)).map(x=>x.name);
+    const bl=document.createElement('div');bl.className='balloon2';bl.innerHTML=`<span class="lbl">${esc(M.longest.toUpperCase())}</span><p>${esc(who.length?M.longFound(show(lang,lw),who.join(', ')):M.longMissed(show(lang,lw)))}</p>`;el.appendChild(bl);
+    for(let i=1;i<=p.length;i++){if(!alive())return;drawB(p.slice(0,i));beep(500+i*60,.05,'triangle');await wait(skip?0:220)}await wait(4200);if(!alive())return;bl.remove();$('#sqTop').classList.add('gone')}
+  /* despedida */
+  const fin=document.createElement('div');fin.className='finmsg';fin.innerHTML=`<p>${esc(M.again)}</p><div class="mpnext" id="mpNext" hidden><small></small><b></b></div>`;el.appendChild(fin);
+  $('#mpActs').hidden=false;mpResUpdate()}
+function confetti(host){const r=host.getBoundingClientRect(),cols=['#ffd23f','#ff4f7b','#2ee6a6','#7ff0ff','#c08bff'];for(let k=0;k<70;k++){const c=document.createElement('div');c.className='conf';c.style.cssText=`left:${r.left+r.width/2}px;top:${r.top+r.height*.4}px;background:${cols[k%5]};--dx:${(Math.random()-.5)*r.width*1.2}px;--dy:${Math.random()*r.height*.7+60}px;--r:${(Math.random()*720)|0}deg;animation-delay:${(Math.random()*200)|0}ms`;document.body.appendChild(c);setTimeout(()=>c.remove(),1900)}}
+/* ---------- início / perfil ---------- */
+function mpHomeUI(){$('#bInvite').hidden=isDesk();$('#bInvite').title=ML().invite;$('#bInvite').setAttribute('aria-label',ML().invite);if(mpS.role==='s')renderQrPanel();else $('#qrPanel').hidden=true}
+async function mpBoot(again){const q=again?null:new URLSearchParams(location.search).get('sala');
+  if(q){if(!store.get('profile',null)){mpS.pend=q;return}const ok=await mpJoin(q,'p');if(ok)view('vLobby',false);return}
+  if(isDesk()){try{const n=await mpConnect();const old=sessionStorage.getItem('emb_room');let reused=false;
+      if(old){const r=await n.get('rooms/'+old);if(r&&r.owner===mpS.uid){await mpEnter(old,'s');reused=true}}
+      if(!reused)await mpCreate('s');mpS.owner=mpS.uid}catch(e){console.error(e);$('#qrPanel').hidden=true}}}
+function mpAfterProfile(){if(mpS.pend){const c=mpS.pend;mpS.pend=null;mpJoin(c,'p').then(ok=>{if(ok)view('vLobby',false)})}else if(mpS.code){Net.update(mpS.base+'/players/'+mpS.uid,{name:prof().name,av:prof().av})}}
 
-IC.friends=`<svg viewBox="0 0 64 64"><circle cx="22" cy="24" r="11" fill="#ff8aa6" stroke="#1b1238" stroke-width="3"/><circle cx="42" cy="24" r="11" fill="#ffd23f" stroke="#1b1238" stroke-width="3"/><path d="M5 56c2-12 9-18 17-18s15 6 17 18z" fill="#ff8aa6" stroke="#1b1238" stroke-width="3" stroke-linejoin="round"/><path d="M25 56c2-12 9-18 17-18s15 6 17 18z" fill="#ffd23f" stroke="#1b1238" stroke-width="3" stroke-linejoin="round"/></svg>`;
 /* ---------- início ---------- */
 G={N:4,g:['p','a','l','a','v','r','a','s','e','m','ch','o','j','o','g','o'],sel:[],found:new Map(),sol:new Map(),running:false,typed:''};
 render();G.sel=[0,1,2,3,7];drawTrail();
-applyLang();setReact('happy');prep().then(()=>{const q=new URLSearchParams(location.search).get('sala');if(!store.get('profile',null)){if(q)mpS.pend=q;openProfile(true)}else if(q){renderRoomTxt();view('vRoom');$('#codeIn').value=q.toUpperCase();mpJoin(q)}});
+applyLang();setReact('happy');prep().then(()=>{if(!store.get('profile',null)){const q=new URLSearchParams(location.search).get('sala');if(q)mpS.pend=q;openProfile(true);if(isDesk()&&!q)mpBoot()}else mpBoot()});
 view('vHome');
-window.__emb={get G(){return G},mpS,get Net(){return Net},mpStart,mpScore,get R(){return R},dicts,loadDict,solve,look,makeBoard,findPath,shareText,analyze,startGame,endGame,submit,store,today,dayNum,center,nextHint,T,show,avatar,AV,survGrow,tick,set skip(v){skipFlag=v}};
+window.__emb={get G(){return G},mpS,get Net(){return Net},mpStart,mpScore,mpJoin,mpSetRole,get R(){return R},dicts,loadDict,solve,look,makeBoard,findPath,shareText,analyze,startGame,endGame,submit,store,today,dayNum,center,nextHint,T,show,avatar,AV,survGrow,tick,set skip(v){skipFlag=v}};
 try{window.claude?.hot?.snapshot?.(()=>({cfg:S}))}catch(e){}
 }
 </script>
