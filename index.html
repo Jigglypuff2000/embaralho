@@ -171,10 +171,10 @@ body.m-classic .danger-stripes,body.m-daily .danger-stripes{background:repeating
 input[type=range]{width:100%;accent-color:var(--coral);height:28px}
 .ticks{display:flex;justify-content:space-between;font:800 12px var(--fb);color:var(--muted)}
 input[type=text]{width:100%;font:700 20px var(--fd);padding:10px 14px;border:3px solid var(--ink);border-radius:14px;background:var(--soft);color:var(--panelInk);-webkit-user-select:text;user-select:text}
-.avs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-height:300px;overflow:auto;padding:4px}
-.avs button{aspect-ratio:1;min-height:0;padding:4px;border-radius:16px;background:var(--soft)}
+.avs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:4px;max-width:min(100%,calc((100vh - 330px) * 1.25));max-width:min(100%,calc((100dvh - 330px) * 1.25));margin:0 auto;width:100%}
+.avs button{position:relative;display:block;width:100%;height:0;min-height:0;padding:0 0 100%;border-radius:16px;background:var(--soft)}
 .avs button[aria-pressed=true]{background:var(--sel)}
-.avs svg{width:100%;height:100%}
+.avs svg{position:absolute;left:8%;top:8%;width:84%;height:84%}
 .how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .how div{background:var(--soft);border-radius:16px;padding:10px;text-align:center;font:800 13px/1.3 var(--fb);animation:cardin .4s backwards}
 .how div:nth-child(2){animation-delay:.35s}.how div:nth-child(3){animation-delay:.7s}
@@ -268,7 +268,7 @@ input[type=text]{width:100%;font:700 20px var(--fd);padding:10px 14px;border:3px
 .endcard svg{width:110px;height:70px;display:block;margin:0 auto 6px;animation:rock 1.2s infinite}
 @media(max-width:900px),(max-aspect-ratio:1/1){.p2row{flex-wrap:wrap}.res{overflow:auto}.rs{height:auto;min-height:100%;grid-template-columns:auto minmax(0,1fr);grid-template-rows:none;grid-template-areas:"board skip" "head head" "mid mid" "av av" "br br" "act act"}.r-av{justify-self:center}.cols{grid-auto-flow:row;grid-template-rows:none!important;grid-template-columns:repeat(2,max-content)}.minib{max-width:140px}.total{text-align:center}}
 @media(max-width:900px){.main{grid-template-columns:minmax(0,1fr)}.side{max-height:none;min-height:0}.list{max-height:200px}}
-@media(max-width:640px){.hud{grid-template-columns:minmax(0,1fr) auto}.hud-r{grid-column:2;grid-row:1}.hud .center{grid-column:1/-1;grid-row:2;justify-self:center}.me .av{width:44px;height:44px}.tray{width:100%;min-width:0;border-radius:22px}.wordzone{height:72px}.wchip{font-size:22px;height:40px}.batt .cell{width:120px}.card{padding:16px}.card h1{font-size:26px}.logo span{width:30px;height:34px;font-size:19px}.avs{grid-template-columns:repeat(4,minmax(0,1fr))}.how{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){.hud{grid-template-columns:minmax(0,1fr) auto}.hud-r{grid-column:2;grid-row:1}.hud .center{grid-column:1/-1;grid-row:2;justify-self:center}.me .av{width:44px;height:44px}.tray{width:100%;min-width:0;border-radius:22px}.wordzone{height:72px}.wchip{font-size:22px;height:40px}.batt .cell{width:120px}.card{padding:16px}.card h1{font-size:26px}.logo span{width:30px;height:34px;font-size:19px}.avs{gap:6px}.how{grid-template-columns:minmax(0,1fr)}}
 /* ---------- v3: início ---------- */
 .avw{position:relative;display:inline-block;flex:0 0 auto}
 .pen{position:absolute;right:-6px;bottom:-4px;width:30px;height:30px;min-height:0;padding:3px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:0 2px 0 var(--ink);display:grid;place-items:center;cursor:pointer}
@@ -353,7 +353,7 @@ input[type=text]{width:100%;font:700 20px var(--fd);padding:10px 14px;border:3px
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
 /* ---------- multijogador ---------- */
-body.menu .app{visibility:hidden}
+body.menu .app{visibility:hidden;position:fixed;inset:0;overflow:hidden}
 body.menu .ov{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
 .credits{font:700 12px/1.4 var(--fb);color:var(--muted)}.credits summary{cursor:pointer;font-weight:800}.credits p{margin:6px 0 0}
 .q{background:#fff;border-radius:12px;padding:5px;border:3px solid var(--ink)}.q svg{width:100%;height:100%;display:block}
