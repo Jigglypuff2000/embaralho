@@ -394,7 +394,7 @@ body.party .tray{width:min(100%,560px,calc(100svh - 330px))}
 body.spect .main{grid-template-columns:minmax(0,1fr)}body.spect .side{display:none}body.spect .tray{width:min(100%,640px,calc(100svh - 330px))}
 @media(max-width:900px){body.party .side{display:none}}
 body:has(#vMpRes:not([hidden])),body.menu{overflow:hidden}
-.qrp{width:270px}.qperr{font:700 13px/1.4 var(--fb);color:var(--coral);text-align:center}.qperr code{font-size:11px;color:var(--muted);word-break:break-all}.qperr button{margin-top:6px;min-height:36px}.qrp .b-sun{font-size:15px;white-space:nowrap}
+.qrp{width:270px}.qrp.err>*:not(.qperr){display:none}.qperr{font:700 13px/1.4 var(--fb);color:var(--coral);text-align:center}.qperr code{font-size:11px;color:var(--muted);word-break:break-all}.qperr button{margin-top:6px;min-height:36px}.qrp .b-sun{font-size:15px;white-space:nowrap}
 .legmin .sqtop.corner,.sqtop.corner{top:calc(12px + 3*clamp(14px,2.2vh,20px)*2.7*.58 + 14px)}
 .small .sqtop.corner{top:calc(12px + 3*13px*3*.46 + 10px)}
 .balloon2{top:calc(12px + 3*clamp(14px,2.2vh,20px)*2.7*.58 + 14px)}
@@ -1245,7 +1245,7 @@ async function mpBoot(again){const q=again?null:new URLSearchParams(location.sea
   if(q){if(!store.get('profile',null)){mpS.pend=q;return}const ok=await mpJoin(q,'p');if(ok)view('vLobby',false);return}
   if(isDesk()){try{const n=await mpConnect();const old=sessionStorage.getItem('emb_room');let reused=false;
       if(old){const r=await n.get('rooms/'+old);if(r&&r.owner===mpS.uid){await mpEnter(old,'s');reused=true}}
-      if(!reused)await mpCreate('s');mpS.owner=mpS.uid;$('#qpErr').hidden=true}catch(e){console.error(e);const el=$('#qrPanel');el.hidden=false;$('#qpErr').hidden=false;$('#qpErr').innerHTML=`${esc(ML().netErr)}<br><code>${esc(String((e&&(e.code||e.message))||e))}</code><br><button class="b-sun" id="bQpRetry">↻</button>`;$('#bQpRetry').onclick=()=>{$('#qpErr').hidden=true;mpBoot(true)}}}}
+      if(!reused)await mpCreate('s');mpS.owner=mpS.uid;$('#qpErr').hidden=true;$('#qrPanel').classList.remove('err')}catch(e){console.error(e);const el=$('#qrPanel');el.hidden=false;el.classList.add('err');$('#qpErr').hidden=false;$('#qpErr').innerHTML=`${esc(ML().netErr)}<br><code>${esc(String((e&&(e.code||e.message))||e))}</code><br><button class="b-sun" id="bQpRetry">↻</button>`;$('#bQpRetry').onclick=()=>{$('#qpErr').hidden=true;$('#qrPanel').classList.remove('err');mpBoot(true)}}}}
 function mpAfterProfile(){if(mpS.pend){const c=mpS.pend;mpS.pend=null;mpJoin(c,'p').then(ok=>{if(ok)view('vLobby',false)})}else if(mpS.code){Net.update(mpS.base+'/players/'+mpS.uid,{name:prof().name,av:prof().av})}}
 
 /* ---------- início ---------- */
