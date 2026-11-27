@@ -1,0 +1,33 @@
+{
+ "_sobre": "Casos de regressão do dicionário. 'aceitar' = precisa valer (qualquer nível); 'rejeitar' = não pode valer. Cada caso tem o motivo. Rodar: python3 tools/dicttest.py",
+ "pt": {
+  "aceitar": {
+   "cedi": "pretérito de ceder; também nome próprio, mas forma verbal prevalece",
+   "devi": "pretérito de dever; também nome próprio",
+   "surti": "pretérito de surtir/surtar",
+   "urgi": "pretérito de urgir",
+   "decai": "presente/pretérito de decair; rara, mas válida",
+   "comi": "pretérito regular",
+   "nua": "feminino de nu", "teta": "substantivo", "miar": "verbo", "mia": "presente de miar",
+   "nata": "substantivo", "saro": "presente de sarar", "doa": "presente de doar", "doar": "verbo",
+   "ranho": "substantivo", "sina": "substantivo", "berro": "substantivo", "berros": "plural",
+   "roa": "subjuntivo de roer", "roi": "rói/roí (acento ignorado)",
+   "uca": "gíria (cachaça)", "anu": "ave", "alua": "aluá (bebida)", "ulna": "osso", "loa": "substantivo",
+   "mol": "unidade", "anas": "anãs", "monca": "presente de moncar", "lucao": "lucão (rede)", "sanca": "substantivo", "anoa": "animal"
+  },
+  "rejeitar": {
+   "roe": "não é forma de roer (presente é rói)",
+   "courar": "não registrado nos dicionários de referência (existe encourar)",
+   "noa": "não é palavra; vinha da regra oa→ão",
+   "che": "interjeição regional/estrangeirismo bloqueado", "sida": "sigla (aids em PT-PT)",
+   "noe": "nome próprio", "pre": "prefixo, não palavra",
+   "tuca": "não confirmado", "uala": "não confirmado", "uanda": "não confirmado", "uandas": "não confirmado",
+   "lunda": "não confirmado", "lundas": "não confirmado", "lunas": "não confirmado", "luandas": "nome próprio no plural",
+   "com": "preposição (política de classes)", "para": "preposição", "uma": "artigo", "pelo": "contração", "das": "contração"
+  }
+ },
+ "en": {
+  "aceitar": {"cat": "controle", "word": "controle"},
+  "rejeitar": {"the": "artigo (política de classes)", "and": "conjunção", "you": "pronome", "for": "preposição"}
+ }
+}

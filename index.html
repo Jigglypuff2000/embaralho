@@ -258,7 +258,7 @@ input[type=text]{width:100%;font:700 20px var(--fd);padding:10px 14px;border:3px
 .achmini p{margin:0;font:700 13px/1.25 var(--fb)}
 .achmini .bar{width:100%}
 .charts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.chcap{grid-column:1/-1;font:700 12px var(--fb);opacity:.85;text-align:center}
+.chcap{grid-column:1/-1;font:700 12px var(--fb);opacity:.85;text-align:center}.chcap.prac{opacity:1;background:rgba(0,0,0,.28);border-radius:10px;padding:3px 8px}
 .sumline{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px}.sumline b{font:700 clamp(40px,8vh,72px)/1 var(--fd);text-shadow:0 4px 0 var(--ink)}.sumline span{font:800 clamp(14px,2vh,18px) var(--fb)}
 .mc{background:var(--panel);color:var(--panelInk);border:3px solid var(--ink);border-radius:16px;padding:8px 10px}
 .mc small{display:block;font:800 12px var(--fb);color:var(--muted)}
@@ -381,7 +381,7 @@ button.chip:focus-visible{outline:3px solid var(--sun,#ffd23f);outline-offset:1p
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
 /* ---------- multijogador ---------- */
-#rPrac{font:700 12px/1.3 var(--fb);background:rgba(0,0,0,.28);border-radius:12px;padding:4px 10px;margin-top:8px;text-align:center}
+#rPrac{width:0;min-width:100%;box-sizing:border-box;font:700 12px/1.3 var(--fb);background:rgba(0,0,0,.28);border-radius:12px;padding:4px 10px;margin-top:8px;text-align:center}
 body.prac #hName::after{content:' · ' attr(data-prac);color:var(--sun,#ffd23f)}
 body.menu .app{visibility:hidden;position:fixed;inset:0;overflow:hidden}
 body.menu .ov{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -586,6 +586,14 @@ body:has(#vMpRes:not([hidden])),body.menu{overflow:hidden}
 .rb-hi button:focus-visible{outline:2px solid var(--vacc);outline-offset:2px}
 .rb-main>button{width:100%;min-height:52px;font-size:17px}
 .rb-sec{background:transparent!important;color:var(--panelInk)!important}
+
+.rb-top{justify-content:space-between;align-items:center}
+.rb-share{display:inline-flex;align-items:center;gap:6px}.rb-share svg{width:18px;height:18px}
+.rb-av{width:clamp(48px,8vh,64px);height:clamp(48px,8vh,64px);display:block;border-radius:50%;box-shadow:0 0 0 3px var(--vbg),0 0 0 5px var(--rbacc,var(--vacc))}
+.rb-main{--rbacc:var(--vacc)}.rb-main.rb-daily{--rbacc:#ff7aa8}.rb-main.rb-surv{--rbacc:#ffd23f}
+.rb-ctx{color:var(--rbacc)!important}
+.rb-total{text-shadow:0 3px 0 rgba(0,0,0,.25)}
+@media(max-height:640px){.rb-main{gap:6px;padding:4px 0 10px}.rb-total{font-size:clamp(60px,14vh,96px)}.rb-hi{margin:0 0 8px}.rb-main>button{min-height:48px}}
 /* painel Ver partida */
 .vtabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
 .vtabs button{flex:1;min-height:44px;background:transparent!important;border:0!important;border-bottom:3px solid transparent!important;border-radius:0!important;color:var(--muted)!important;font:700 15px var(--fb)}
@@ -1196,7 +1204,7 @@ async function showResults(res,sol,instant){
   $('#bSkip').textContent=VB?XB().skipAnim:L.skip;$('#bSkip').hidden=!!instant;$('#rActs').hidden=true;
   const longest=longestOf(res,a);R.longest=longest;
   miniPath([]);
-  $('#rHead').innerHTML=VB?`<div class="rctx">${esc(ctxLine(res))}</div>`:`<div class="title-pill">${surv?L.youSurvived(fmt(res.elapsed)):L.youFound(res.found.length)}</div>`;{const pn=$('#rPrac');pn.hidden=!res.prac;if(res.prac)pn.textContent=XL().pracNote(res.official)}
+  $('#rHead').innerHTML=VB?`<div class="rctx">${esc(ctxLine(res))}</div>`:`<div class="title-pill">${surv?L.youSurvived(fmt(res.elapsed)):L.youFound(res.found.length)}</div>`;{const pn=$('#rPrac');pn.hidden=true;if(0)pn.textContent=XL().pracNote(res.official)}
   $('#rPlaque').innerHTML=`<div class="plaque"><span class="av">${avatar(p.av,'happy')}</span><div class="pad"></div><div class="base">${esc(p.name)} <b id="plS">0</b></div></div>`;
   $('#rBR').innerHTML=`<div class="total">${esc(surv?L.timeLbl:L.total)}<b id="rTot">${surv?'0:00':'0'}</b></div>`;
   const hinted=new Set(res.hinted||[]);const words=res.found.slice().sort((x,y)=>x.length-y.length||x.localeCompare(y));
@@ -1231,7 +1239,7 @@ async function showResults(res,sol,instant){
   const hist=res.hist||[];const bm=Math.max(0,...hist.map(h=>h.m)),bw=Math.max(0,...hist.map(h=>h.w)),mx=Math.max(1,bm),mw=Math.max(1,bw);const bars=(arr,m)=>arr.map((v,i)=>`<i class="${i===arr.length-1?'cur':''}${v?'':' z'}" style="height:${Math.max(4,v/m*100)}%;animation-delay:${i*50}ms"><em>${i===arr.length-1&&v?(surv?fmt(v):v):''}</em></i>`).join('');
   const last=hist[hist.length-1]||{m:surv?res.elapsed:res.score,w:res.found.length};
   const cfgT=surv?L.surv+' · '+({easy:L.dEasy,normal:L.dNormal,adv:L.dAdv,master:L.dMaster}[res.diff]||''):res.mode==='daily'?(res.prac?XL().prac:L.daily.replace(/\s*(#|n°|Nr\.)\s*$/,'')):res.N+'×'+res.N+' · '+fmt(res.time);
-  $('#rBR').innerHTML=`<div class="sumline"><b>${surv?fmt(res.elapsed):res.score}</b><span>${esc(surv?L.timeLbl:L.pointsW)} · ${esc(L.words(res.found.length))}</span></div><div class="charts"><small class="chcap">${esc(hist.length>1?XL().lastN(hist.length,cfgT):XL().firstOne(cfgT))}</small><div class="mc"><small>${esc(surv?L.histTime:L.histScore)}</small><div class="bars">${bars(hist.map(h=>h.m),mx)}</div><b>${surv?fmt(last.m):last.m}</b> <small>${esc(L.best)} ${surv?fmt(bm):bm}</small></div><div class="mc"><small>${esc(L.histWords)}</small><div class="bars">${bars(hist.map(h=>h.w),mw)}</div><b>${last.w}</b> <small>${esc(L.best)} ${bw}</small></div>
+  $('#rBR').innerHTML=`<div class="sumline"><b>${surv?fmt(res.elapsed):res.score}</b><span>${esc(surv?L.timeLbl:L.pointsW)} · ${esc(L.words(res.found.length))}</span></div><div class="charts"><small class="chcap${res.prac?' prac':''}">${esc(res.prac?XL().pracNote(res.official):hist.length>1?XL().lastN(hist.length,cfgT):XL().firstOne(cfgT))}</small><div class="mc"><small>${esc(surv?L.histTime:L.histScore)}</small><div class="bars">${bars(hist.map(h=>h.m),mx)}</div><b>${surv?fmt(last.m):last.m}</b> <small>${esc(L.best)} ${surv?fmt(bm):bm}</small></div><div class="mc"><small>${esc(L.histWords)}</small><div class="bars">${bars(hist.map(h=>h.w),mw)}</div><b>${last.w}</b> <small>${esc(L.best)} ${bw}</small></div>
     <div class="lwbox"><div>${esc(L.longGame)}:<span class="wc-chip L${Math.min(8,(res.longGame||'').length)}">${esc(res.longGame?show(res.lang,res.longGame):'—')}</span></div><div>${esc(L.longEver)}:<span class="wc-chip L${Math.min(8,(res.longEver||'').length)}">${esc(res.longEver?show(res.lang,res.longEver):'—')}</span></div></div></div>`;
   await rwait(900);
   for(const u of res.unl||[]){toast(L.unlocked+' '+u,3500);await rwait(1200)}
@@ -1342,18 +1350,20 @@ function resB(res,a){const X=XB(),surv=res.mode==='surv';
   else if(res.record&&prev.length)hi=esc(X.rec);
   else if(prev.length){const pb=Math.max(...prev);hi=esc(X.prev(surv?fmt(pb):pb));hiCls=' neutral'}
   else if(res.found.length){hi=esc(X.first);hiCls=' neutral'}
-  else{hi=esc(X.zero);hiCls=' neutral'}
+  else{hi=esc(XL().zeroTip);hiCls=' neutral'}
   const tag=res.mode==='daily'?(res.prac?X.prac(res.official):X.official):'';
   const sub=surv?`${esc(L.timeLbl)} · ${esc(L.words(res.found.length))}`:`${esc(L.pointsW)} · ${esc(L.words(res.found.length))}`;
-  B.innerHTML=`<div class="rb-top"><button class="rb-link" id="bBHome">‹ ${esc(X.home)}</button></div>
-   <div class="rb-main" role="group" aria-label="${esc(ctxLine(res))}">
+  const shareOk=res.mode==='daily'&&!res.prac,pr=prof(),md=surv?'surv':res.mode==='daily'?'daily':'classic';
+  B.innerHTML=`<div class="rb-top"><button class="rb-link" id="bBHome">‹ ${esc(X.home)}</button>${shareOk?`<button class="rb-link rb-share" id="bBShare">${ICS.share}<span>${esc(X.share)}</span></button>`:''}</div>
+   <div class="rb-main rb-${md}" role="group" aria-label="${esc(ctxLine(res))}">
+    <span class="av rb-av" aria-hidden="true">${avatar(pr.av,res.found.length?(res.record?'love':'happy'):'worry')}</span>
     <div class="rb-ctx">${esc(ctxLine(res))}</div>${tag?`<div class="rb-tag">${esc(tag)}</div>`:''}
     <div class="rb-total" aria-live="polite">${val}</div><div class="rb-sub">${sub}</div>
     <div class="rb-hi${hiCls}">${hi}</div>
     <button class="b-pri" id="bBAgain">${esc(res.mode==='daily'?X.againPrac:X.again)}</button>
     <button class="rb-sec" id="bBView">${esc(X.view)}</button></div>`;
   B.hidden=false;B.scrollTop=0;
-  $('#bBHome').onclick=goHome;$('#bBAgain').onclick=()=>startGame(res.mode);$('#bBView').onclick=()=>openWords();
+  $('#bBHome').onclick=goHome;{const sb=$('#bBShare');if(sb)sb.onclick=async()=>{const txt=shareText(res,a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?XL().copiedPost:L.copyFail,3000)}}}$('#bBAgain').onclick=()=>startGame(res.mode);$('#bBView').onclick=()=>openWords();
   const ha=$('#bHiAch');if(ha)ha.onclick=()=>{openWords();setVTab('a')};
   $('#bBAgain').focus({preventScroll:true})}
 function vEvoHTML(res){const X=XB(),surv=res.mode==='surv',hist=res.hist||[];
