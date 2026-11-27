@@ -16,4 +16,12 @@ for lang in ['pt','en','es','fr','de','it']:
         if w in d:bad+=1;print(f'[{lang}] FALHOU rejeitar {w!r} ({why}) nível={d[w][0]}')
     for w,f in t.get('exibir',{}).items():
         if w in d and d[w][1]!=f:bad+=1;print(f'[{lang}] FALHOU grafia {w!r}: {d[w][1]!r} != {f!r}')
+# colisao: palavra rejeitada cuja forma sem acento coincide com uma conjugação válida (faco = faço)
+import unicodedata
+_n=lambda x:''.join(c for c in unicodedata.normalize('NFD',x) if unicodedata.category(c)!='Mn').replace('ç','c')
+_cj=os.path.join(root,'tools','conj_pt.txt')
+if os.path.exists(_cj):
+    CJ={_n(w) for w in open(_cj,encoding='utf-8').read().split()}
+    for w in T['pt']['rejeitar']:
+        if w in CJ and w not in T['pt'].get('colisao_ok',{}):bad+=1;print(f'[pt] colisão: {w!r} rejeitada mas é forma verbal sem acento')
 print('OK' if not bad else f'{bad} falha(s)');sys.exit(1 if bad else 0)

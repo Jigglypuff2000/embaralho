@@ -114,8 +114,6 @@
    "paris": "vós paris (parir); nível 0, não aparece na dica",
    "iara": "mãe-d’água (Houaiss, DELAS-PB)",
    "sio": "forma de siar",
-   "custao": "aumentativo de custo (pedido do Bruno)",
-   "remao": "aumentativo de remo (pedido do Bruno)",
    "monco": "ranho (DELAS-PB)",
    "caio": "eu caio",
    "ecoica": "feminino de ecoico",
@@ -124,7 +122,11 @@
    "lamire": "diapasão (DELAS-PB)",
    "aie": "forma de aiar",
    "cactos": "plural",
-   "toai": "forma de toar"
+   "toai": "forma de toar",
+   "faco": "faço (fazer)",
+   "desseis": "désseis (dar)",
+   "ereis": "éreis (ser)",
+   "adi": "eu adi (adir); coincide com sigla, por isso nível 0 (fora da dica)"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -156,7 +158,6 @@
    "lhos": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
    "lhas": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
    "mos": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
-   "adi": "retirada a pedido: forma rara de adir, com nível inflado pela sigla ADI",
    "aca": "açã: não confirmada fora do Hunspell; retirada a pedido",
    "acas": "idem",
    "aletradai": "pedido do Bruno: não é palavra do português do Brasil",
@@ -226,14 +227,17 @@
    "paresio": "pedido do Bruno",
    "auga": "pedido do Bruno",
    "conas": "termo vulgar só de Portugal",
-   "facos": "sem uso comum no Brasil (pedido do Bruno)",
    "loreal": "marca",
-   "per": "preposição arcaica"
+   "per": "preposição arcaica",
+   "custao": "coloquial, fora dos dicionários",
+   "remao": "coloquial, fora dos dicionários",
+   "citao": "não existe"
   },
   "exibir": {
    "bencao": "bênção",
    "ate": "até",
-   "voce": "você"
+   "voce": "você",
+   "faco": "faço"
   }
  },
  "en": {
