@@ -14,4 +14,6 @@ for lang in ['pt','en','es','fr','de','it']:
         if w not in d:bad+=1;print(f'[{lang}] FALHOU aceitar {w!r} ({why})')
     for w,why in t['rejeitar'].items():
         if w in d:bad+=1;print(f'[{lang}] FALHOU rejeitar {w!r} ({why}) nível={d[w][0]}')
+    for w,f in t.get('exibir',{}).items():
+        if w in d and d[w][1]!=f:bad+=1;print(f'[{lang}] FALHOU grafia {w!r}: {d[w][1]!r} != {f!r}')
 print('OK' if not bad else f'{bad} falha(s)');sys.exit(1 if bad else 0)

@@ -62,7 +62,13 @@
    "uma": "artigo",
    "pelo": "contração",
    "das": "contração",
-   "concerni": "concernir é unipessoal (só 3ª pessoa): não existe 1ª pessoa"
+   "concerni": "concernir é unipessoal (só 3ª pessoa): não existe 1ª pessoa",
+   "abc": "sigla/abecedário lido letra por letra (estava com nível alto e aparecia na dica)",
+   "cia": "abreviação de companhia / sigla",
+   "fifa": "sigla"
+  },
+  "exibir": {
+   "bencao": "bênção"
   }
  },
  "en": {
