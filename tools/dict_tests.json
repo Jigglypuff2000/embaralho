@@ -139,7 +139,14 @@
    "zaina": "feminino de zaino",
    "adiro": "eu adiro",
    "faisoas": "fêmea do faisão",
-   "tabelioas": "feminino de tabelião"
+   "tabelioas": "feminino de tabelião",
+   "meco": "meço (medir)",
+   "mecas": "meças",
+   "oucas": "ouças",
+   "tusso": "tusso (tossir)",
+   "infiro": "inferir",
+   "quisereis": "quiséreis",
+   "deramos": "déramos"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -264,7 +271,8 @@
    "bencao": "bênção",
    "ate": "até",
    "voce": "você",
-   "faco": "faço"
+   "faco": "faço",
+   "meco": "meço"
   }
  },
  "en": {

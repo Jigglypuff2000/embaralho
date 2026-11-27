@@ -22,6 +22,9 @@ _n=lambda x:''.join(c for c in unicodedata.normalize('NFD',x) if unicodedata.cat
 _cj=os.path.join(root,'tools','conj_pt.txt')
 if os.path.exists(_cj):
     CJ={_n(w) for w in open(_cj,encoding='utf-8').read().split()}
+    _d=load(os.path.join(root,'dict-pt.json'));_ban=('aletr','arad','trad','raer','paresi','augar')
+    conj_faltando=[w for w in CJ if 3<=len(w)<=16 and w.isalpha() and w.isascii() and w not in _d and w not in T['pt']['rejeitar'] and not w.startswith(_ban) and w not in ('las','los','lho','lha','lhos','lhas','mos')]
+    if conj_faltando:bad+=1;print('[pt] conjugações da lista brasileira ausentes:',len(conj_faltando),conj_faltando[:10])
     for w in T['pt']['rejeitar']:
         if w in CJ and w not in T['pt'].get('colisao_ok',{}):bad+=1;print(f'[pt] colisão: {w!r} rejeitada mas é forma verbal sem acento')
 print('OK' if not bad else f'{bad} falha(s)');sys.exit(1 if bad else 0)
