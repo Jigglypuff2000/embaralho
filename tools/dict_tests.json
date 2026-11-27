@@ -67,7 +67,10 @@
    "ante": "preposição",
    "com": "preposição",
    "uma": "artigo",
-   "que": "pronome/conjunção"
+   "que": "pronome/conjunção",
+   "runa": "caractere rúnico (substantivo; faltava nas fontes)",
+   "runas": "plural de runa",
+   "dato": "forma de datar (eu dato)"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -98,7 +101,10 @@
    "lha": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
    "lhos": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
    "lhas": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
-   "mos": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los"
+   "mos": "pronome combinado que aparece colado ao verbo (deu-lho), como las/los",
+   "adi": "retirada a pedido: forma rara de adir, com nível inflado pela sigla ADI",
+   "aca": "açã: não confirmada fora do Hunspell; retirada a pedido",
+   "acas": "idem"
   },
   "exibir": {
    "bencao": "bênção",
