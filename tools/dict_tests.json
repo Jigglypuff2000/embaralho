@@ -95,7 +95,12 @@
    "professora": "feminino",
    "jogadora": "feminino",
    "motora": "adjetivo",
-   "valora": "forma de valorar"
+   "valora": "forma de valorar",
+   "elitro": "élitro (VOLP)",
+   "ilirio": "gentílico (DELAS-PB, adjetivo)",
+   "tri": "o tri, tricampeonato (DELAS-PB, substantivo)",
+   "lio": "forma de liar (atar)",
+   "irio": "forma de iriar (eu irio)"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -172,7 +177,11 @@
    "computadora": "feminino inventado de objeto",
    "decisona": "aumentativo inventado de substantivo abstrato",
    "irmona": "forma inventada",
-   "esplendora": "feminino inventado"
+   "esplendora": "feminino inventado",
+   "ero": "não é forma do português atual",
+   "ilia": "plural latino; o plural de ílio é ílios",
+   "chi": "no Brasil a interjeição é XI e a letra grega é QUI",
+   "rer": "arcaico (mesmo critério de raer)"
   },
   "exibir": {
    "bencao": "bênção",
