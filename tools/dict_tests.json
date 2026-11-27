@@ -51,7 +51,23 @@
    "esta": "está, forma de estar",
    "segue": "forma de seguir",
    "jugue": "forma de jugar",
-   "junjo": "forma de jungir"
+   "junjo": "forma de jungir",
+   "sem": "preposição",
+   "seu": "pronome",
+   "teu": "pronome",
+   "meu": "pronome",
+   "este": "pronome",
+   "aquele": "pronome",
+   "desde": "preposição",
+   "quando": "advérbio/conjunção",
+   "ele": "pronome",
+   "ela": "pronome",
+   "dele": "contração",
+   "onde": "advérbio",
+   "ante": "preposição",
+   "com": "preposição",
+   "uma": "artigo",
+   "que": "pronome/conjunção"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -69,28 +85,20 @@
    "lundas": "não confirmado",
    "lunas": "não confirmado",
    "luandas": "nome próprio no plural",
-   "com": "preposição (política de classes)",
-   "uma": "artigo",
    "concerni": "concernir é unipessoal (só 3ª pessoa): não existe 1ª pessoa",
    "abc": "sigla/abecedário lido letra por letra (estava com nível alto e aparecia na dica)",
    "cia": "abreviação de companhia / sigla",
    "fifa": "sigla",
-   "sem": "preposição; não é forma de ser",
-   "seu": "pronome; não é forma de ser",
-   "teu": "pronome; não é forma de ter",
-   "las": "pronome",
-   "este": "pronome; não é forma de estar",
-   "ele": "pronome (só coincide com o verbo raríssimo elar)",
-   "ela": "pronome (idem)",
-   "onde": "advérbio (só coincide com ondar)",
+   "las": "variante do pronome \"as\" que só aparece colada ao verbo (comprá-las)",
    "sege": "grafia errada de segue (segar)",
    "juge": "grafia errada de jugue",
-   "jungo": "grafia errada de junjo"
+   "jungo": "grafia errada de junjo",
+   "los": "idem, variante de \"os\""
   },
   "exibir": {
    "bencao": "bênção",
-   "das": "dás",
-   "esta": "está"
+   "ate": "até",
+   "voce": "você"
   }
  },
  "en": {
