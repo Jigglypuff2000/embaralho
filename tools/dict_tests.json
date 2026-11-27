@@ -108,7 +108,12 @@
    "internet": "incorporada (VOLP)",
    "kit": "incorporada",
    "moedinha": "diminutivo comum",
-   "casinha": "diminutivo comum"
+   "casinha": "diminutivo comum",
+   "rezao": "rezão",
+   "ore": "forma de orar (que eu ore, ore você)",
+   "paris": "vós paris (parir); nível 0, não aparece na dica",
+   "iara": "mãe-d’água (Houaiss, DELAS-PB)",
+   "sio": "forma de siar"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -199,7 +204,16 @@
    "download": "estrangeirismo não adaptado",
    "shampoo": "estrangeirismo (BR: xampu)",
    "web": "estrangeirismo",
-   "instalacaozinha": "diminutivo inventado"
+   "instalacaozinha": "diminutivo inventado",
+   "ere": "pedido do Bruno",
+   "reio": "pedido do Bruno",
+   "gois": "pedido do Bruno",
+   "argot": "pedido do Bruno",
+   "parse": "pedido do Bruno",
+   "rap": "pedido do Bruno",
+   "sir": "pedido do Bruno",
+   "paresio": "pedido do Bruno",
+   "auga": "pedido do Bruno"
   },
   "exibir": {
    "bencao": "bênção",
