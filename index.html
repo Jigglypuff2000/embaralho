@@ -236,7 +236,7 @@ input[type=text]{width:100%;font:700 20px var(--fd);padding:10px 14px;border:3px
 .title-pill b{color:var(--sel)}
 .cols{display:grid;grid-auto-flow:column;grid-template-rows:repeat(10,auto);grid-auto-columns:max-content;gap:clamp(4px,.8vh,8px) 14px;justify-content:center;align-content:center;max-height:100%}
 .cols .wc-chip{height:clamp(24px,3.6vh,36px);font-size:clamp(13px,2vh,17px);animation:chipin .35s backwards}
-.cols.fast .wc-chip{animation:none}
+.cols.fast .wc-chip{animation:none}.cols.measure .wc-chip{width:max-content!important}.cols.scroll{overflow-y:auto!important;overscroll-behavior:contain}
 @keyframes chipin{from{transform:translateY(-14px) scale(.6);opacity:0}}
 .rs.p2 .r-mid>*{animation:cardin .45s backwards}
 .plaque{display:flex;flex-direction:column;align-items:center;position:relative;width:max-content;max-width:100%}
@@ -344,8 +344,9 @@ button.chip:focus-visible{outline:3px solid var(--sun,#ffd23f);outline-offset:1p
  .r-head .balloon{padding:6px 12px;border-radius:16px;gap:4px}.balloon p{font-size:clamp(14px,2.2vh,18px)}.balloon .lbl{font-size:10px}
  .title-pill{font-size:clamp(16px,2.6vh,22px);padding:6px 16px}
  .r-mid{min-height:0;overflow:hidden;align-items:flex-start}
- .cols{grid-auto-flow:row;grid-template-rows:none!important;grid-template-columns:repeat(auto-fill,minmax(84px,max-content));gap:5px 6px;max-height:100%;overflow:hidden;align-content:start;justify-content:center}
- .cols .wc-chip{height:24px;font-size:12px}
+ .cols{width:100%;grid-auto-flow:row;grid-template-rows:none!important;grid-template-columns:repeat(auto-fill,minmax(calc(84px*var(--k,1)),max-content));gap:calc(5px*var(--k,1)) calc(6px*var(--k,1));max-height:100%;overflow:hidden;align-content:start;justify-content:center}
+ .cols .wc-chip{height:calc(24px*var(--k,1));font-size:calc(12px*var(--k,1));padding:0 .3em 0 .85em;gap:.4em}
+ .cols .wc-chip b{min-width:2.4em;height:1.7em;font-size:.95em;padding:0 .4em}
  .p2row{flex-wrap:nowrap;gap:6px;width:100%;align-self:center}
  .achmini{flex:1 1 0;min-width:0;padding:6px 6px 8px;border-radius:14px;gap:3px}
  .achmini .ic{width:30px;height:30px;font-size:18px;border-radius:9px}.achmini em{font-size:10px;padding:1px 7px}
@@ -1302,7 +1303,7 @@ async function showResults(res,sol,instant){
   $('#rBR').innerHTML=`<div class="total">${esc(surv?L.timeLbl:L.total)}<b id="rTot">${surv?'0:00':'0'}</b></div>`;
   const hinted=new Set(res.hinted||[]);const words=res.found.slice().sort((x,y)=>x.length-y.length||x.localeCompare(y));
   const n=words.length,rows=n>40?Math.ceil(n/4):10,step=Math.max(30,Math.min(75,2300/Math.max(1,n)));
-  $('#rMid').innerHTML=`<div class="cols${skipFlag?' fast':''}" id="rCols" style="grid-template-rows:repeat(${rows},auto)">${words.map((w,k)=>`<span class="wc-chip L${Math.min(8,w.length)}" style="animation-delay:${Math.round(k*step)}ms"><span class="w">${esc(show(res.lang,w))}${hinted.has(w)?`<i class="hl" title="${esc(XB().viaHint)}" aria-label="${esc(XB().viaHint)}">💡</i>`:''}</span><b>+${pts(w.length)}</b></span>`).join('')}</div>`;
+  $('#rMid').innerHTML=`<div class="cols${skipFlag?' fast':''}" id="rCols" style="grid-template-rows:repeat(${rows},auto)">${words.map((w,k)=>`<span class="wc-chip L${Math.min(8,w.length)}" style="animation-delay:${Math.round(k*step)}ms"><span class="w">${esc(show(res.lang,w))}${hinted.has(w)?`<i class="hl" title="${esc(XB().viaHint)}" aria-label="${esc(XB().viaHint)}">💡</i>`:''}</span><b>+${pts(w.length)}</b></span>`).join('')}</div>`;fitCols();
   const dur=skipFlag?1:n*step+300,t0=performance.now();
   await new Promise(r=>{let lastK=-1;const st=t=>{if(tok!==resTok)return r();const k=Math.min(1,(t-t0)/dur);if(skipFlag){r();return}
       if(surv)$('#rTot').textContent=fmt(res.elapsed*k);else{const m=Math.floor(k*n);let run=0;for(let i=0;i<m;i++)run+=pts(words[i].length);$('#rTot').textContent=run;if(m!==lastK&&m>0){lastK=m;beep(480+Math.min(25,m)*22,.035,'triangle',.035)}}
@@ -1434,6 +1435,16 @@ function ctxLine(res){const surv=res.mode==='surv';
   if(res.mode==='daily')return dName(res.date);
   return [L.classicW,res.N+'×'+res.N,fmt(res.time)].join(' · ')}
 function newAchs(res){return (res.ach||[]).filter(x=>achInfo(ACH[x.i],x.from).level<achInfo(ACH[x.i],x.to).level)}
+function fitCols(){const c=document.getElementById('rCols');if(!c||!c.offsetParent)return;c.style.removeProperty('--k');c.classList.remove('scroll');
+  const over=()=>{const cb=Math.min(c.getBoundingClientRect().bottom,c.parentElement.getBoundingClientRect().bottom),l=c.lastElementChild;return c.scrollHeight>c.clientHeight||(l&&l.getBoundingClientRect().bottom>cb+.5)};
+  if(getComputedStyle(c).gridAutoFlow.indexOf('column')>=0){const ch=c.firstElementChild;if(!ch)return;const gap=parseFloat(getComputedStyle(c).rowGap)||0,hh=c.parentElement.clientHeight,per=ch.offsetHeight+gap,fit=Math.max(4,Math.floor((hh+gap)/per)),n=c.children.length;
+    if(n>fit||over())c.style.gridTemplateRows=`repeat(${Math.min(fit,Math.max(10,Math.ceil(n/Math.max(1,Math.floor(c.parentElement.clientWidth/(ch.offsetWidth+14))))))},auto)`;if(over())c.classList.add('scroll');return}
+  const W=c.clientWidth,gx=parseFloat(getComputedStyle(c).columnGap)||6;
+  const lay=k=>{c.style.setProperty('--k',k.toFixed(2));c.style.gridTemplateColumns='';c.classList.add('measure');let mw=0;for(const e of c.children)mw=Math.max(mw,e.offsetWidth);c.classList.remove('measure');
+    const cols=Math.max(1,Math.floor((W+gx)/(mw+gx)));c.style.gridTemplateColumns=`repeat(${cols},${Math.ceil(mw)}px)`};
+  let k=1;lay(k);while(over()&&k>.8){k-=.05;lay(k)}if(over())c.classList.add('scroll')}
+addEventListener('resize',()=>{clearTimeout(fitCols.t);fitCols.t=setTimeout(fitCols,150)});
+try{new ResizeObserver(()=>{clearTimeout(fitCols.t);fitCols.t=setTimeout(fitCols,60)}).observe(document.getElementById('rMid'))}catch(e){}
 function resB(res,a){const X=XB(),surv=res.mode==='surv';
   $('#rs').hidden=true;$('#rActs').hidden=true;const B=$('#rB');
   const val=surv?fmt(res.elapsed):res.score;
