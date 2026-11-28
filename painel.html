@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Embaralho · Painel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: painel de bordo do jogo, direto e legível
+   IDEA: o tabuleiro de letras: cada número é uma peça clara sobre o roxo do jogo
+   PICTURE: gráfico de visitas por dia em destaque, rankings de estados e países como barras
+   COLOUR+TYPE: roxo #1c1830 do jogo, amarelo #ffd23f de destaque, creme #fff7e8; Fredoka + Nunito
+   LAYOUT: números-chave no topo, gráfico grande, depois locais, aparelhos e o jogo */
+:root{--bg:#1c1830;--panel:#262140;--line:#3a3360;--ink:#fff7e8;--mut:#aaa3c8;--sun:#ffd23f;--mint:#2ee6a6;--pink:#ff7aa8;--sky:#7ae0ff}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Nunito,system-ui,sans-serif;overflow-x:clip}
+h1,h2,.num{font-family:Fredoka,system-ui,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:clamp(16px,3vw,36px) max(4vw,14px) 48px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-bottom:22px}
+.logo{display:grid;grid-template-columns:repeat(3,26px);gap:3px;background:#120e22;padding:5px;border-radius:9px;flex:none}
+.logo span{height:26px;border-radius:6px;background:var(--ink);color:#1b1238;font:700 15px Fredoka;display:grid;place-items:center}
+.logo span.y{background:var(--sun)}
+h1{margin:0;font-size:clamp(26px,4vw,38px);line-height:1.05;font-weight:700}
+.sub{color:var(--mut);font-size:14px;margin:2px 0 0}
+.ctl{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,input{font:inherit;color:inherit}
+.seg{display:flex;background:var(--panel);border-radius:12px;padding:3px}
+.seg button{border:0;background:none;padding:8px 14px;border-radius:9px;min-height:40px;cursor:pointer;font-weight:800;color:var(--mut)}
+.seg button[aria-pressed=true]{background:var(--sun);color:#1b1238}
+.btn{border:2px solid var(--line);background:var(--panel);border-radius:12px;padding:8px 14px;min-height:44px;cursor:pointer;font-weight:800}
+.btn:hover,.seg button:hover{color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.kpi{background:var(--panel);border-radius:18px;padding:16px 18px}
+.kpi .num{font-size:clamp(30px,4.4vw,46px);line-height:1;font-weight:700}
+.kpi .lbl{color:var(--mut);font-weight:800;font-size:14px;margin-top:6px}
+.kpi.main{background:var(--sun);color:#1b1238}.kpi.main .lbl{color:#4a3d10}
+.card{background:var(--panel);border-radius:18px;padding:18px 18px 16px}
+.card h2{margin:0 0 12px;font-size:20px;font-weight:600}
+.card h2 small{font:700 13px Nunito;color:var(--mut);margin-left:6px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.fig{position:relative;height:clamp(220px,32vh,320px)}.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-weight:800;font-size:14px;color:var(--mut);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-weight:700;font-size:15px}
+.bar .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .v{font-variant-numeric:tabular-nums;color:var(--mut);text-align:right}
+.bar .track{display:block;grid-column:1/-1;height:9px;background:#1c1830;border-radius:9px;overflow:hidden}
+.bar .fill{display:block;height:100%;border-radius:9px;background:var(--sun)}
+.empty{color:var(--mut);font-weight:700;font-size:14px}
+.note{color:var(--mut);font-size:13px;margin-top:10px}
+.setup{background:var(--panel);border-radius:18px;padding:22px;max-width:680px}
+.setup h2{margin:0 0 8px;font-size:22px}
+.setup label{display:block;font-weight:800;margin:14px 0 6px}
+.setup input[type=password],.setup input[type=text]{width:100%;font-size:16px;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:#1c1830}
+.drop{margin-top:16px;border:2px dashed var(--line);border-radius:14px;padding:18px;text-align:center;color:var(--mut);font-weight:700}
+.drop.on{border-color:var(--sun);color:var(--ink)}
+.err{background:#3a1f33;color:#ffc2d4;border-radius:12px;padding:10px 14px;margin:12px 0;font-weight:700;font-size:14px}
+.src{color:var(--mut);font-size:13px;margin-top:18px}
+.hide{display:none!important}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){.grid2{grid-template-columns:minmax(0,1fr)}.ctl{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo" aria-hidden="true"><span>E</span><span>M</span><span class="y">B</span><span>A</span><span class="y">R</span><span class="y">A</span><span>L</span><span>H</span><span>O</span></div>
+  <div><h1>Painel do Embaralho</h1><p class="sub" id="sub">Visitas e partidas, só em números somados</p></div>
+  <div class="ctl" id="ctl">
+    <div class="seg" role="group" aria-label="Período">
+      <button data-d="1">Hoje</button><button data-d="7" aria-pressed="true">7 dias</button><button data-d="30">30 dias</button><button data-d="90">90 dias</button>
+    </div>
+    <button class="btn" id="bRef">Atualizar</button>
+    <button class="btn" id="bKey">Chave</button>
+  </div>
+</header>
+
+<section class="setup hide" id="setup">
+  <h2>Conectar ao GoatCounter</h2>
+  <p>Cole a chave da API (no GoatCounter: seu usuário no menu de cima → API → crie uma chave com permissão de leitura de estatísticas). Ela fica guardada só neste navegador.</p>
+  <label for="kTok">Chave da API</label>
+  <input id="kTok" type="password" autocomplete="off" spellcheck="false">
+  <p style="margin-top:14px"><button class="btn" id="kSave" style="background:var(--sun);color:#1b1238;border-color:var(--sun)">Conectar</button></p>
+  <div class="err hide" id="kErr"></div>
+  <div class="drop" id="drop">Sem API? Exporte o CSV no GoatCounter (Settings → Export) e solte o arquivo aqui<br><input type="file" id="fCsv" accept=".csv,.gz,text/csv" style="margin-top:10px"></div>
+</section>
+
+<main id="dash" class="hide">
+  <div class="kpis">
+    <div class="kpi main"><div class="num" id="kVis">–</div><div class="lbl">visitas de público</div></div>
+    <div class="kpi"><div class="num" id="kGames">–</div><div class="lbl">partidas iniciadas</div></div>
+    <div class="kpi"><div class="num" id="kPhone">–</div><div class="lbl">pelo celular</div></div>
+    <div class="kpi"><div class="num" id="kKnown">–</div><div class="lbl">visitas conhecidas (fora do total)</div></div>
+  </div>
+  <div class="card">
+    <h2>Visitas por dia</h2>
+    <div class="fig"><svg id="chart" role="img" aria-label="Visitas por dia"></svg></div>
+    <div class="legend"><span><i style="background:var(--sun)"></i>Público</span><span><i style="background:var(--sky)"></i>Conhecidos</span></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>Estados <small>Brasil</small></h2><div class="bars" id="bStates"></div><p class="note">Estado é aproximado: operadoras de celular costumam aparecer como SP.</p></div>
+    <div class="card"><h2>Países</h2><div class="bars" id="bCountries"></div></div>
+  </div>
+  <div class="grid3">
+    <div class="card"><h2>Modos jogados</h2><div class="bars" id="bModes"></div></div>
+    <div class="card"><h2>Palavras por partida</h2><div class="bars" id="bWords"></div></div>
+    <div class="card"><h2>Social</h2><div class="bars" id="bSocial"></div></div>
+  </div>
+  <div class="grid3">
+    <div class="card"><h2>Aparelhos</h2><div class="bars" id="bSizes"></div></div>
+    <div class="card"><h2>Sistemas</h2><div class="bars" id="bSys"></div></div>
+    <div class="card"><h2>Navegadores</h2><div class="bars" id="bBrow"></div></div>
+  </div>
+  <div class="grid3">
+    <div class="card"><h2>Visual escolhido</h2><div class="bars" id="bVis"></div></div>
+    <div class="card"><h2>Idioma das palavras</h2><div class="bars" id="bLang"></div></div>
+    <div class="card"><h2>Quem é conhecido</h2><div class="bars" id="bKnown"></div></div>
+  </div>
+  <p class="src" id="src"></p>
+</main>
+</div>
+<script>
+{
+const SITE='https://embaralho.goatcounter.com/api/v0';
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number(n||0).toLocaleString('pt-BR');
+const UF={AC:'Acre',AL:'Alagoas',AP:'Amapá',AM:'Amazonas',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MT:'Mato Grosso',MS:'Mato Grosso do Sul',MG:'Minas Gerais',PA:'Pará',PB:'Paraíba',PR:'Paraná',PE:'Pernambuco',PI:'Piauí',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',RS:'Rio Grande do Sul',RO:'Rondônia',RR:'Roraima',SC:'Santa Catarina',SP:'São Paulo',SE:'Sergipe',TO:'Tocantins'};
+let DN=null;try{DN=new Intl.DisplayNames(['pt-BR'],{type:'region'})}catch(e){}
+const country=c=>{if(!c)return'(desconhecido)';try{return DN?DN.of(c):c}catch(e){return c}};
+const MODE={'classico':'Clássico','desafio':'Desafio do dia','sobrevivencia':'Sobrevivência','multiplayer':'Multiplayer'};
+const SIZE=w=>w<=0?'(desconhecido)':w<=600?'Celular':w<=1000?'Tablet':'Computador';
+let days=7,tok='',csvRows=null;
+try{tok=localStorage.getItem('emb_gc_tok')||''}catch(e){}
+
+function range(){const e=new Date(),s=new Date();s.setDate(e.getDate()-(days-1));const f=d=>d.toISOString().slice(0,10);return{start:f(s),end:f(e),list:[...Array(days)].map((_,i)=>{const d=new Date(s);d.setDate(s.getDate()+i);return f(d)})}}
+async function api(p,q={}){const r=range();const u=new URL(SITE+p);u.searchParams.set('start',r.start);u.searchParams.set('end',new Date().toISOString().replace(/\.\d+Z$/,'Z'));for(const[k,v]of Object.entries(q))u.searchParams.set(k,v);
+  const res=await fetch(u,{headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'}});if(!res.ok)throw new Error('HTTP '+res.status);return res.json()}
+const cnt=x=>Number(x.count??x.count_unique??x.visitors??x.total??0);
+
+function bars(el,rows,{color='var(--sun)',limit=8,empty='Sem dados neste período'}={}){
+  rows=rows.filter(r=>r.v>0).sort((a,b)=>b.v-a.v);const tot=rows.reduce((s,r)=>s+r.v,0);
+  if(!rows.length){$(el).innerHTML=`<p class="empty">${esc(empty)}</p>`;return}
+  const max=rows[0].v;
+  $(el).innerHTML=rows.slice(0,limit).map(r=>`<div class="bar"><span class="t">${esc(r.k)}</span><span class="v">${fmt(r.v)} · ${Math.round(r.v*100/tot)}%</span><span class="track"><span class="fill" style="width:${(r.v/max*100).toFixed(1)}%;background:${color}"></span></span></div>`).join('')}
+
+function chart(series){const s=$('#chart');const draw=()=>{const W=s.clientWidth,H=s.clientHeight,pl=34,pr=10,pt=12,pb=26;const n=series.days.length;
+  const max=Math.max(1,...series.pub,...series.known);const nice=Math.ceil(max/4)*4||4;const x=i=>pl+(n<2?0:i*(W-pl-pr)/(n-1)),y=v=>pt+(H-pt-pb)*(1-v/nice);
+  const path=a=>a.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join('');
+  const area=a=>path(a)+`L${x(n-1)} ${y(0)}L${x(0)} ${y(0)}Z`;let g='';
+  for(let k=0;k<=4;k++){const v=nice*k/4;g+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="#3a3360"/><text x="${pl-6}" y="${y(v)+4}" fill="#aaa3c8" font-size="12" text-anchor="end">${v}</text>`}
+  const step=Math.max(1,Math.ceil(n/(W<520?4:8)));
+  series.days.forEach((d,i)=>{if(i%step===0||i===n-1)g+=`<text x="${x(i)}" y="${H-6}" fill="#aaa3c8" font-size="12" text-anchor="${i===n-1&&n>1?'end':i===0&&n>1?'start':'middle'}">${d.slice(8)}/${d.slice(5,7)}</text>`});
+  g+=`<path d="${area(series.pub)}" fill="rgba(255,210,63,.18)"/><path d="${path(series.pub)}" fill="none" stroke="#ffd23f" stroke-width="3" stroke-linejoin="round"/><path d="${path(series.known)}" fill="none" stroke="#7ae0ff" stroke-width="2" stroke-dasharray="5 5"/>`;
+  if(n<=31)series.pub.forEach((v,i)=>{g+=`<circle cx="${x(i)}" cy="${y(v)}" r="3.5" fill="#ffd23f"><title>${series.days[i]}: ${v}</title></circle>`});
+  s.innerHTML=g};draw();if(!chart.ro){chart.ro=new ResizeObserver(()=>chart.last&&chart.last());chart.ro.observe(s)}chart.last=draw}
+
+function render(D){
+  $('#setup').classList.add('hide');$('#dash').classList.remove('hide');
+  $('#kVis').textContent=fmt(D.pub);$('#kKnown').textContent=fmt(D.knownTot);$('#kGames').textContent=fmt(D.games);
+  const ph=D.sizes.find(r=>r.k==='Celular'),st=D.sizes.reduce((s,r)=>s+r.v,0);$('#kPhone').textContent=st?Math.round((ph?ph.v:0)*100/st)+'%':'–';
+  chart(D.series);
+  bars('#bStates',D.states,{limit:10,empty:'Nenhum estado identificado ainda'});
+  bars('#bCountries',D.countries,{limit:10,color:'var(--mint)'});
+  bars('#bModes',D.modes,{color:'var(--pink)'});bars('#bWords',D.words,{color:'var(--pink)'});bars('#bSocial',D.social,{color:'var(--pink)',empty:'Ninguém compartilhou ou criou sala ainda'});
+  bars('#bSizes',D.sizes,{color:'var(--sky)'});bars('#bSys',D.sys,{color:'var(--sky)'});bars('#bBrow',D.brow,{color:'var(--sky)'});
+  bars('#bVis',D.vis);bars('#bLang',D.lang);bars('#bKnown',D.known,{color:'var(--sky)',empty:'Nenhum aparelho marcado com ?eu=nome'});
+  $('#src').textContent=`Fonte: GoatCounter (embaralho.goatcounter.com), ${D.how}. Período: ${range().start} a ${range().end}. Visitas de aparelhos conhecidos não entram nos totais nem nas contagens do jogo.`}
+
+function evRows(list,prefix,map=x=>x){const m={};for(const h of list)if(h.p.startsWith(prefix)){const k=map(h.p.slice(prefix.length));m[k]=(m[k]||0)+h.v}return Object.entries(m).map(([k,v])=>({k,v}))}
+const LANG={pt:'Português',en:'Inglês',es:'Espanhol',fr:'Francês',de:'Alemão',it:'Italiano'};
+const SOC={'sala/criada':'Salas criadas','sala/entrou':'Entradas em sala','compartilhou':'Compartilhamentos'};
+function fromHits(hits,dayList){
+  const H=hits.map(h=>({p:String(h.path||'').replace(/^\//,''),v:cnt(h),stats:h.stats||[]}));
+  const series={days:dayList,pub:dayList.map(()=>0),known:dayList.map(()=>0)};
+  for(const h of H){const pub=h.p.startsWith('publico'),kn=h.p.startsWith('conhecido');if(!pub&&!kn)continue;
+    for(const st of h.stats){const i=dayList.indexOf(st.day);if(i>=0)(pub?series.pub:series.known)[i]+=Number(st.daily??st.count??0)}}
+  const sum=p=>H.filter(h=>h.p.startsWith(p)).reduce((s,h)=>s+h.v,0);
+  const modes=evRows(H,'ev/jogo/inicio/',k=>{const b=k.split('-')[0];return (MODE[b]||k)+(k.includes('-')?' '+k.split('-')[1]:'')});
+  return{series,pub:sum('publico'),knownTot:sum('conhecido'),games:modes.reduce((s,r)=>s+r.v,0),modes,
+    words:evRows(H,'ev/jogo/palavras/',k=>k+' palavras').sort((a,b)=>parseInt(a.k)-parseInt(b.k)),
+    social:H.filter(h=>SOC[h.p.slice(3)]).map(h=>({k:SOC[h.p.slice(3)],v:h.v})),
+    vis:evRows(H,'ev/visual/',k=>k==='clean'?'Clean (B)':'Atual (A)'),lang:evRows(H,'ev/idioma/',k=>LANG[k]||k),
+    known:evRows(H,'conhecido/',k=>k.split('/')[0])}}
+
+async function loadApi(){
+  $('#sub').textContent='Carregando…';const r=range();
+  let hits=[],more=true,after='';for(let i=0;i<10&&more;i++){const j=await api('/stats/hits',{limit:100,daily:true,...(after?{exclude_paths:after}:{})});const a=j.hits||[];hits=hits.concat(a);more=!!j.more&&a.length>0;after=hits.map(h=>h.path_id).join(',')}
+  const D=fromHits(hits,r.list);
+  const pubIds=hits.filter(h=>String(h.path||'').replace(/^\//,'').startsWith('publico')).map(h=>h.path_id).join(',');
+  const pq=pubIds?{include_paths:pubIds}:{};
+  const page=async p=>{if(!pubIds)return[];try{const j=await api('/stats/'+p,{limit:50,...pq});return j.stats||[]}catch(e){return[]}};
+  const [loc,sizes,sys,brow]=await Promise.all([page('locations'),page('sizes'),page('systems'),page('browsers')]);
+  D.countries=loc.map(x=>({k:x.id?country(x.id):(x.name||'(desconhecido)'),v:cnt(x)}));
+  let reg=[];if(pubIds)try{const j=await api('/stats/locations/BR',{limit:50,...pq});reg=j.stats||[]}catch(e){}
+  D.states=reg.map(x=>{const c=String(x.id||'').split('-').pop();return{k:UF[c]||x.name||c||'(sem estado)',v:cnt(x)}});
+  const SZ={phone:'Celular',tablet:'Tablet',desktop:'Computador',desktophd:'Computador',unknown:'(desconhecido)'};
+  const sm={};for(const x of sizes){const k=SZ[x.id]||x.name||x.id;sm[k]=(sm[k]||0)+cnt(x)}D.sizes=Object.entries(sm).map(([k,v])=>({k,v}));
+  D.sys=sys.map(x=>({k:x.name||x.id,v:cnt(x)}));D.brow=brow.map(x=>({k:x.name||x.id,v:cnt(x)}));
+  D.how='API ao vivo';render(D);$('#sub').textContent='Atualizado agora · '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
+
+/* CSV exportado do GoatCounter: uma linha por visualização, agregada aqui */
+function parseCSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===','){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}if(f||row.length){row.push(f);rows.push(row)}return rows}
+function fromCSV(){const r=range();const [hd,...rows]=csvRows;const ix=n=>hd.findIndex(h=>h.toLowerCase().replace(/^\d+,?/,'').trim()===n);
+  const iP=ix('path'),iD=ix('date'),iL=ix('location'),iS=ix('screen size'),iSy=ix('system'),iB=ix('browser'),iBot=ix('bot');
+  const inR=d=>d>=r.start&&d<=r.end+'T99';const hs={},loc={},st={},sz={},sy={},br={},series={days:r.list,pub:r.list.map(()=>0),known:r.list.map(()=>0)};
+  for(const row of rows){if(row.length<3)continue;const d=(row[iD]||'').slice(0,10);if(!inR(d))continue;if(iBot>=0&&row[iBot]&&row[iBot]!=='0')continue;
+    const p=String(row[iP]||'').replace(/^\//,'');hs[p]=(hs[p]||0)+1;const pub=p.startsWith('publico'),kn=p.startsWith('conhecido');const di=r.list.indexOf(d);if(di>=0&&(pub||kn))(pub?series.pub:series.known)[di]++;
+    if(!pub)continue;const L=row[iL]||'';const c=L.split('-')[0];loc[c]=(loc[c]||0)+1;if(c==='BR'&&L.includes('-')){const u=L.split('-')[1];st[u]=(st[u]||0)+1}
+    const w=parseInt(String(row[iS]||'').split(',')[0])||0;const k=SIZE(w);sz[k]=(sz[k]||0)+1;sy[row[iSy]||'?']=(sy[row[iSy]||'?']||0)+1;br[row[iB]||'?']=(br[row[iB]||'?']||0)+1}
+  const H=Object.entries(hs).map(([p,v])=>({path:p,count:v,stats:[]}));const D=fromHits(H,r.list);D.series=series;
+  const L=o=>Object.entries(o).map(([k,v])=>({k,v}));D.countries=L(loc).map(x=>({k:country(x.k),v:x.v}));D.states=L(st).map(x=>({k:UF[x.k]||x.k,v:x.v}));D.sizes=L(sz);D.sys=L(sy);D.brow=L(br);
+  D.how='arquivo CSV exportado (no CSV os números são visualizações, não visitantes)';render(D);$('#sub').textContent='Dados do arquivo CSV'}
+
+async function load(){if(csvRows){fromCSV();return}if(!tok){showSetup();return}
+  try{await loadApi()}catch(e){showSetup(`Não consegui ler a API (${e.message==='Failed to fetch'?'o GoatCounter bloqueou a consulta direta pelo navegador':e.message}). Confira a chave ou use o CSV abaixo.`)}}
+function showSetup(msg){$('#dash').classList.add('hide');$('#setup').classList.remove('hide');$('#kErr').classList.toggle('hide',!msg);$('#kErr').textContent=msg||'';$('#sub').textContent='Visitas e partidas, só em números somados'}
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));days=+b.dataset.d;load()}));
+$('#bRef').addEventListener('click',load);$('#bKey').addEventListener('click',()=>{$('#kTok').value=tok;showSetup()});
+$('#kSave').addEventListener('click',()=>{tok=$('#kTok').value.trim();csvRows=null;try{tok?localStorage.setItem('emb_gc_tok',tok):localStorage.removeItem('emb_gc_tok')}catch(e){}load()});
+const readFile=async f=>{try{let t;if(f.name.endsWith('.gz')&&'DecompressionStream'in window){t=await new Response(f.stream().pipeThrough(new DecompressionStream('gzip'))).text()}else t=await f.text();csvRows=parseCSV(t);days=Math.max(days,90);document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.d===days));fromCSV()}catch(e){showSetup('Não consegui ler o arquivo: '+e.message)}};
+$('#fCsv').addEventListener('change',e=>e.target.files[0]&&readFile(e.target.files[0]));
+const dz=$('#drop');dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('on')});dz.addEventListener('dragleave',()=>dz.classList.remove('on'));dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('on');const f=e.dataTransfer.files[0];if(f)readFile(f)});
+load();
+}
+</script>
+</body>
+</html>
