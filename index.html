@@ -866,6 +866,7 @@ body:has(#vMpRes:not([hidden])),body.menu{overflow:hidden}
 
 <script>
 /* ---------- chave de visual A/B: ?visual=b liga, ?visual=a volta ao atual (padrão = B; A só se escolhido) ---------- */
+window.gcEv=window.gcEv||function(n){(window.__gcq=window.__gcq||[]).push(n)};
 const VB=(()=>{try{const q=new URLSearchParams(location.search).get('visual');if(q==='b'||q==='a'){localStorage.setItem('emb3_vis',q==='a'?'A':'B')}return localStorage.getItem('emb3_vis')!=='A'}catch(e){return true}})();
 if(VB)document.documentElement.classList.add('vb');
 {
@@ -1188,6 +1189,7 @@ async function startGame(mode,fromSave,mp){
     else{const N=mode==='daily'?4:S.size,time=mode==='daily'?120:S.time;const b=makeBoard(lang,N,mode==='daily'?hash('emb'+date+lang):(Math.random()*2**32)>>>0);st={mode,lang,N,time,left:time,g:b.g,sol:b.sol,found:[],score:0,hints:0,date,dn:dayNum(date),idle:0,prac}}}
   clearInterval(G&&G.iv);
   G={...st,found:new Map(st.found),sel:[],typed:'',running:false,paused:false,hintWord:null,hintShown:0,streakT:[],danger:false};
+  if(!fromSave)gcEv('jogo/inicio/'+(mode==='surv'?'sobrevivencia':mode==='daily'?'desafio':mode==='party'?'multiplayer':'classico')+(mode==='classic'?'-'+G.N+'x'+G.N:''));
   if(G.mode!=='party'&&G.lang!==S.lang){S.lang=G.lang;store.set('cfg',S);applyLang()}
   document.body.className='m-'+(G.mode==='surv'?'surv':G.mode==='daily'?'daily':'classic')+(G.mode==='party'?' party'+(G.spect?' spect':''):'')+(G.prac?' prac':'');$('#hName').dataset.prac=XL().prac;setHud();
   await wipe();hideViews();$('#vRes').hidden=true;tray.classList.remove('veil');navStack=[];
@@ -1258,6 +1260,7 @@ function setCtl(){const tap=S.ctl==='tap'&&G&&G.running!==undefined;$('#bOk').hi
 /* ---------- fim e resultado ---------- */
 async function endGame(why){
   if(!G||!G.running)return;G.running=false;clearInterval(G.iv);G.sel=[];G.typed='';G.hintWord=null;drawTrail();drawHint();$('#bHint').hidden=true;danger(false);setHud();
+  gcEv('jogo/fim/'+(G.mode==='surv'?'sobrevivencia':G.mode==='daily'?'desafio':G.mode==='party'?'multiplayer':'classico'));gcEv('jogo/palavras/'+(n=>n===0?'0':n<10?'1-9':n<25?'10-24':n<50?'25-49':'50+')(G.found.size));
   if(G.mode==='party'){mpFinish();return}
   const surv=G.mode==='surv';const st=ST(),lang=G.lang;
   const found=[...G.found.keys()];
@@ -1340,7 +1343,7 @@ async function showResults(res,sol,instant){
   showActs(res,a)}
 function showActs(res,a){if(!$('#rActs').hidden)return;const X=XL();
   $('#rActs').innerHTML=`<button class="b-pri ib main" id="bAgain">${ICS.again}<span>${esc(X.again)}</span></button><button class="b-ghost ib" id="bShare">${ICS.share}<span>${esc(X.share)}</span></button><button class="b-ghost ib" id="bAll">${ICS.words}<span>${esc(X.words)}</span></button><button class="b-ghost ib" id="bHome">${ICS.home}<span>${esc(X.home)}</span></button>`;$('#rActs').hidden=false;$('#bSkip').hidden=true;
-  $('#bShare').onclick=async()=>{const txt=shareText(res,a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?X.copiedPost:L.copyFail,3000);if(!ok)openWords()}};
+  $('#bShare').onclick=async()=>{gcEv('compartilhou');const txt=shareText(res,a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?X.copiedPost:L.copyFail,3000);if(!ok)openWords()}};
   $('#bAgain').onclick=()=>startGame(res.mode);$('#bHome').onclick=goHome;$('#bAll').onclick=openWords}
 const doSkip=()=>{skipFlag=true;skipRes.splice(0).forEach(f=>f())};$('#bSkip').onclick=doSkip;
 $('#vRes').addEventListener('click',e=>{if(!e.target.closest('button,[data-w],a')&&!$('#bSkip').hidden)doSkip()});
@@ -1463,7 +1466,7 @@ function resB(res,a){const X=XB(),surv=res.mode==='surv';
     <button class="b-pri" id="bBAgain">${esc(X.again)}</button>
     <button class="rb-sec" id="bBView">${esc(X.view)}<small> · ${esc(L.words(nw))}</small></button></div>`;
   B.hidden=false;B.scrollTop=0;
-  $('#bBHome').onclick=goHome;{const sb=$('#bBShare');if(sb)sb.onclick=async()=>{const txt=shareText(res,a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?XL().copiedPost:L.copyFail,3000)}}}$('#bBAgain').onclick=()=>startGame(res.mode);$('#bBView').onclick=()=>openWords();
+  $('#bBHome').onclick=goHome;{const sb=$('#bBShare');if(sb)sb.onclick=async()=>{gcEv('compartilhou');const txt=shareText(res,a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?XL().copiedPost:L.copyFail,3000)}}}$('#bBAgain').onclick=()=>startGame(res.mode);$('#bBView').onclick=()=>openWords();
   const ha=$('#bHiAch');if(ha)ha.onclick=()=>{openWords();setVTab('a')};
   $('#bBAgain').focus({preventScroll:true})}
 function vEvoHTML(res){const X=XB(),surv=res.mode==='surv',hist=res.hist||[];
@@ -1486,7 +1489,7 @@ function vbWordsUI(on){const X=XB();$('#vTabs').hidden=!on;$('#bVShare').hidden=
   if(!on)return;$('#wTitle').textContent=X.yourGame;
   $('#vTabs').innerHTML=[['w',X.tW],['e',X.tE],['a',X.tA]].map(([k,t])=>`<button type="button" role="tab" data-t="${k}" aria-selected="${k==='w'}">${esc(t)}</button>`).join('');
   $('#bVShare').innerHTML=`${ICS.share}<span class="sr">${esc(X.share)}</span>`;$('#bVShare').setAttribute('aria-label',X.share);$('#bVShare').title=X.share;$('#bVShare').className='vshare ico b-ghost';
-  $('#bVShare').onclick=async()=>{const txt=shareText(R,R.a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?XL().copiedPost:L.copyFail,3000)}};
+  $('#bVShare').onclick=async()=>{gcEv('compartilhou');const txt=shareText(R,R.a);let done=false;if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({text:txt});done=true}catch(e){if(e&&e.name==='AbortError')return}}if(!done){const ok=await copyText(txt);toast(ok?XL().copiedPost:L.copyFail,3000)}};
   vTab='w'}
 document.addEventListener('click',e=>{const b=e.target.closest('#vTabs button');if(b)setVTab(b.dataset.t)});
 document.addEventListener('keydown',e=>{const b=e.target.closest&&e.target.closest('#vTabs button');if(!b||(e.key!=='ArrowRight'&&e.key!=='ArrowLeft'))return;const all=[...$$('#vTabs button')];const i=all.indexOf(b);const n=all[(i+(e.key==='ArrowRight'?1:all.length-1))%all.length];n.focus();setVTab(n.dataset.t)});
@@ -1539,7 +1542,7 @@ async function mpCreate(role){const n=await mpConnect();let code=null;
 async function mpJoin(code,role='p',onErr){const err=onErr||(m=>toast(m,3000));{const m=String(code||'').match(/[?&]sala=([A-Za-z0-9]{6})/);if(m)code=m[1]}code=String(code||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(code.length!==CODELEN){err(ML().notFound);return false}
   try{const n=await mpConnect();const room=await n.get('rooms/'+code);if(!room||!room.owner){err(ML().notFound);return false}
     const ps=mpPlayers(room);if(role==='p'&&ps.length>=MAXP&&!ps.some(([id])=>id===mpS.uid)){err(ML().full);return false}
-    if(mpS.code&&mpS.code!==code)await mpLeave(true);await mpEnter(code,role);return true}catch(e){console.error(e);err(ML().netErr);return false}}
+    if(mpS.code&&mpS.code!==code)await mpLeave(true);await mpEnter(code,role);gcEv('sala/entrou');return true}catch(e){console.error(e);err(ML().netErr);return false}}
 async function mpEnter(code,role){const n=Net;mpS.code=code;mpS.base='rooms/'+code;mpS.role=role;mpS.seen=0;mpS.wait=null;const p=prof();const me=mpS.base+'/players/'+mpS.uid;
   const old=await n.get(me);await n.set(me,{name:p.name,av:p.av,on:true,j:old&&old.j?old.j:n.TS(),c:0,rc:0,role});await n.onDisc(me+'/on',false);
   const rd=await n.get(mpS.base+'/round');if(rd&&n.now()>rd.startAt+rd.time*1000)mpS.seen=rd.n;
@@ -1614,7 +1617,7 @@ $('#bFrNew').onclick=()=>{$('#vFriends').hidden=true;mpNewRoom()};
 $('#bFrJoin').onclick=async()=>{const b=$('#bFrJoin'),er=$('#frErr');er.hidden=true;b.disabled=true;try{const ok=await mpJoin($('#frIn').value,'p',m=>{er.textContent=m;er.hidden=false;$('#frIn').focus()});if(ok){$('#vFriends').hidden=true;$('#frIn').value='';view('vLobby',false);mpUI()}}finally{b.disabled=false}};
 $('#frIn').onkeydown=e=>{if(e.key==='Enter')$('#bFrJoin').click()};
 $('#bInvite').onclick=()=>{if(mpS.code&&mpS.role==='p'){view('vLobby',false);mpUI();openInvite();return}openFriends()};
-async function mpNewRoom(){const b=$('#bInvite');b.disabled=true;try{if(mpS.code&&mpS.role!=='p')await mpSetRole('p');if(!mpS.code)await mpCreate('p');view('vLobby',false);mpUI();openInvite()}catch(e){console.error(e);toast(ML().netErr,3200)}finally{b.disabled=false}};
+async function mpNewRoom(){const b=$('#bInvite');b.disabled=true;gcEv('sala/criada');try{if(mpS.code&&mpS.role!=='p')await mpSetRole('p');if(!mpS.code)await mpCreate('p');view('vLobby',false);mpUI();openInvite()}catch(e){console.error(e);toast(ML().netErr,3200)}finally{b.disabled=false}};
 function openInvite(){if(!mpS.code)return;const M=ML();$('#ivQR').innerHTML=Net.qr(roomURL(mpS.code));$('#ivCode').textContent=mpS.code;$('#ivT').textContent=M.scan;$('#ivOr').textContent=M.orCode;$('#bIvCopy').textContent=M.copyLink;$('#bIvClose').textContent=M.close;$('#vInvite').hidden=false}
 $('#bIvClose').onclick=()=>$('#vInvite').hidden=true;$('#vInvite').onclick=e=>{if(e.target.id==='vInvite')$('#vInvite').hidden=true};
 $('#bIvCopy').onclick=async()=>{const u=roomURL(mpS.code);let ok=false;try{if(navigator.share){await navigator.share({url:u,title:'Embaralho'});ok=true}}catch(e){}if(!ok){ok=await copyText(u);toast(ok?ML().copied:u,2600)}};
@@ -1746,8 +1749,10 @@ const GC='embaralho';   // conta no goatcounter.com; vazio = desligado
     if(v==='0'){localStorage.removeItem('emb_eu');setTimeout(()=>toast('Este aparelho voltou a contar como visitante.',3500),800)}
     if(v){q.delete('eu');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash)}}catch(e){}
   if(!GC||MOCK||/^(localhost|127\.)/.test(location.hostname))return;let eu='';try{eu=localStorage.getItem('emb_eu')||'';if(eu==='1')eu='eu'}catch(e){}
-  window.goatcounter={no_onload:true};const sc=document.createElement('script');sc.async=true;sc.src='//gc.zgo.at/count.js';sc.dataset.goatcounter='https://'+GC+'.goatcounter.com/count';
-  sc.onload=()=>{try{window.goatcounter.count({path:(eu?'/conhecido/'+eu:'/publico')+(new URLSearchParams(location.search).get('sala')?'/sala':''),title:eu?'Conhecido: '+eu:'Acesso público'})}catch(e){}};document.head.appendChild(sc)})();
+  window.goatcounter={no_onload:true};const send=n=>{if(eu)return;try{window.goatcounter.count({path:'ev/'+n,title:n,event:true})}catch(e){}};
+  const sc=document.createElement('script');sc.async=true;sc.src='//gc.zgo.at/count.js';sc.dataset.goatcounter='https://'+GC+'.goatcounter.com/count';
+  sc.onload=()=>{try{window.goatcounter.count({path:(eu?'/conhecido/'+eu:'/publico')+(new URLSearchParams(location.search).get('sala')?'/sala':''),title:eu?'Conhecido: '+eu:'Acesso público'})}catch(e){}
+    window.gcEv=send;send('visual/'+(VB?'clean':'atual'));send('idioma/'+S.lang);(window.__gcq||[]).forEach(send);window.__gcq=[]};document.head.appendChild(sc)})();
 function mpAfterProfile(){if(mpS.pend){const c=mpS.pend;mpS.pend=null;mpJoin(c,'p').then(ok=>{if(ok)view('vLobby',false)})}else if(mpS.code){Net.update(mpS.base+'/players/'+mpS.uid,{name:prof().name,av:prof().av})}}
 
 /* ---------- início ---------- */
