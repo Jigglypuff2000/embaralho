@@ -146,7 +146,22 @@
    "tusso": "tusso (tossir)",
    "infiro": "inferir",
    "quisereis": "quiséreis",
-   "deramos": "déramos"
+   "deramos": "déramos",
+   "adoidado": "grafia brasileira",
+   "anoitecida": "anoitecer",
+   "biscoitado": "biscoitar",
+   "coitado": "adjetivo",
+   "coicear": "BR",
+   "doidejar": "BR",
+   "touro": "BR",
+   "louca": "louça",
+   "optica": "fibra óptica",
+   "truste": "aportuguesado",
+   "zoo": "VOLP",
+   "stalinismo": "derivado de nome próprio",
+   "dourar": "BR",
+   "escoicear": "coice",
+   "tresnoitar": "noite"
   },
   "rejeitar": {
    "roe": "não é forma de roer (presente é rói)",
@@ -265,7 +280,16 @@
    "ues": "nome de letra",
    "pregoa": "feminino inventado",
    "unioa": "forma inventada",
-   "dora": "nome próprio"
+   "dora": "nome próprio",
+   "toiro": "variante de Portugal (BR: touro)",
+   "loica": "variante de Portugal (BR: louça)",
+   "chavena": "termo de Portugal",
+   "mouse": "estrangeirismo",
+   "scooter": "estrangeirismo",
+   "status": "estrangeirismo",
+   "jeans": "estrangeirismo",
+   "doirar": "variante de Portugal (BR: dourar)",
+   "toirear": "variante de Portugal (BR: tourear)"
   },
   "exibir": {
    "bencao": "bênção",
