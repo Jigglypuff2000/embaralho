@@ -1728,11 +1728,15 @@ async function mpBoot(again){const q=again?null:new URLSearchParams(location.sea
       if(old){const r=await n.get('rooms/'+old);if(r&&r.owner===mpS.uid){await mpEnter(old,'s');reused=true}}
       if(!reused)await mpCreate('s');mpS.owner=mpS.uid;$('#qpErr').hidden=true;$('#qrPanel').classList.remove('err')}catch(e){console.error(e);const el=$('#qrPanel');el.hidden=false;el.classList.add('err');$('#qpErr').hidden=false;$('#qpErr').innerHTML=`${esc(ML().netErr)}<br><code>${esc(String((e&&(e.code||e.message))||e))}</code><br><button class="b-sun" id="bQpRetry">↻</button>`;$('#bQpRetry').onclick=()=>{$('#qpErr').hidden=true;$('#qrPanel').classList.remove('err');mpBoot(true)}}}}
 /* ---------- contador de visitas (GoatCounter) ---------- */
-const GC='';   // código da conta no goatcounter.com (ex.: 'embaralho'); vazio = desligado
-(function(){try{const q=new URLSearchParams(location.search);if(q.get('eu')==='1'){localStorage.setItem('emb_eu','1');setTimeout(()=>toast('Este aparelho agora conta como acesso conhecido.',3500),800)}if(q.get('eu')==='0')localStorage.removeItem('emb_eu')}catch(e){}
-  if(!GC||MOCK||/^(localhost|127\.)/.test(location.hostname))return;let eu=false;try{eu=localStorage.getItem('emb_eu')==='1'}catch(e){}
+const GC='embaralho';   // conta no goatcounter.com; vazio = desligado
+/* ?eu=nome marca este aparelho (ex.: ?eu=bruno, ?eu=duda); ?eu=0 desmarca. Aparelhos marcados aparecem como /conhecido/nome */
+(function(){try{const q=new URLSearchParams(location.search),v=(q.get('eu')||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,20);
+    if(v&&v!=='0'){const nm=v==='1'?'eu':v;localStorage.setItem('emb_eu',nm);setTimeout(()=>toast('Este aparelho agora conta como “'+nm+'”.',3500),800)}
+    if(v==='0'){localStorage.removeItem('emb_eu');setTimeout(()=>toast('Este aparelho voltou a contar como visitante.',3500),800)}
+    if(v){q.delete('eu');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash)}}catch(e){}
+  if(!GC||MOCK||/^(localhost|127\.)/.test(location.hostname))return;let eu='';try{eu=localStorage.getItem('emb_eu')||'';if(eu==='1')eu='eu'}catch(e){}
   window.goatcounter={no_onload:true};const sc=document.createElement('script');sc.async=true;sc.src='//gc.zgo.at/count.js';sc.dataset.goatcounter='https://'+GC+'.goatcounter.com/count';
-  sc.onload=()=>{try{window.goatcounter.count({path:(eu?'/conhecido':'/publico')+(new URLSearchParams(location.search).get('sala')?'/sala':''),title:eu?'Acesso conhecido':'Acesso público'})}catch(e){}};document.head.appendChild(sc)})();
+  sc.onload=()=>{try{window.goatcounter.count({path:(eu?'/conhecido/'+eu:'/publico')+(new URLSearchParams(location.search).get('sala')?'/sala':''),title:eu?'Conhecido: '+eu:'Acesso público'})}catch(e){}};document.head.appendChild(sc)})();
 function mpAfterProfile(){if(mpS.pend){const c=mpS.pend;mpS.pend=null;mpJoin(c,'p').then(ok=>{if(ok)view('vLobby',false)})}else if(mpS.code){Net.update(mpS.base+'/players/'+mpS.uid,{name:prof().name,av:prof().av})}}
 
 /* ---------- início ---------- */
